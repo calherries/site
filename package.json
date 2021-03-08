@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "clean-css-cli": "^5.2.1",
+    "onchange": "^7.1.0",
+    "tailwindcss": "^2.0.3"
+  }
+}
