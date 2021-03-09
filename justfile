@@ -11,7 +11,7 @@ build-html:
   bootleg index.clj -o index.html
 
 dev:
-  npx onchange -i index.clj -- just build-html
+  npx onchange -i *.clj *.md -- just build-html
 
 build-assets:
   build-css

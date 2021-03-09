@@ -1,7 +1,7 @@
-# I'm Cal.
+Previously I worked at Uber and Sennder in pricing optimization.
 
-Previously I worked at Uber and Sennder.
+Sometimes I write [here](https://callumherries.com).
 
-Some posts I've written are here.
+Sometimes I code [here](https://github.com/callum-herries).
 
 [hi@callumherries.com](hihi@callumherries.com)
