@@ -28,3 +28,8 @@ build-assets:
 
 sync:
   browser-sync start --server --files "**/*.html" "**/*.css"
+
+deploy:
+  just build-css-prod
+  fossil ci -m "Built css"
+  fossil git export
