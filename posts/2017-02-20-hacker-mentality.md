@@ -1,4 +1,4 @@
-## What it really means to be a life-hacker
+# What it means to be a life-hacker
 
 Life-hack refers to any trick, shortcut, skill, or novelty method that increases productivity and efficiency, in all walks of life.
 

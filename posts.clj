@@ -17,8 +17,9 @@
 (def posts (for [post-path (fs/glob "." "posts/*.md")]
              (let [title (-> post-path
                              fs/file-name
+                             (->> (re-find #"^\d{4}-\d{2}-\d{2}-(.*).md$"))
+                             second
                              (string/replace #"-" " ")
-                             (string/replace #".md$" "")
                              capitalize-words)
                    link-path (string/replace post-path #".md$" ".html")]
                {:title title
