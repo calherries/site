@@ -1,4 +1,4 @@
-# 10 common fallacies programmers make
+# 10 common programmer fallacies 
 
 As a self-taught programmer, I spend a lot of time reading programming blogs to decide what to learn next.
 
