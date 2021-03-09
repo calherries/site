@@ -1,13 +1,11 @@
 build-css-dev:
-  npx tailwindcss build tailwind.css -o resources/public/css/main.css
+  postcss resources/css/app-utilities.pcss -o resources/public/css/app-utilities.css
+  postcss resources/css/app-components.pcss -o resources/public/css/app-components.css -w --verbose
 
-build-css:
+build-css-prod:
   #!/usr/bin/env bash
-  out=resources/public/css/main.css
-  min=resources/public/css/main.min.css
-  NODE_ENV=production npx tailwindcss build tailwind.css -o $out
-  npx cleancss -o $min $out
-  mv $min $out
+  NODE_ENV=production postcss resources/css/app-utilities.pcss -o resources/public/css/app-utilities.css
+  NODE_ENV=production postcss resources/css/app-components.pcss -o resources/public/css/app-components.css
 
 build-html:
   bootleg index.clj -o index.html
@@ -18,3 +16,6 @@ dev:
 build-assets:
   build-css
   build-html
+
+sync:
+  browser-sync start --server --files "**/*.html" "**/*.css"
