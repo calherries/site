@@ -66,7 +66,7 @@ It's a bit noisier than the Python version, but it works in a similar way. Here'
 ```
 Notice the similarity?
 
-The Clojure "class" is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method from the object by calling the function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state.
+The Clojure "class" is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state.
 
 ```Clojure
 object  method-name
