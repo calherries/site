@@ -61,7 +61,6 @@
   [:html
    [:head
     [:meta {:charset "UTF-8"}]
-    [:title "Cal Herries"]
     [:meta {:name "description" :content "My personal site."}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/app-components.css"}]
@@ -75,11 +74,10 @@
    [:body {:class "p-8"}
     [:div {:class "flex gap-5 mb-4"}
      [:h2 {:class "font-bold"}
-      [:a {:href "/"} "Home"]]
-     #_[:h2 {:class "font-bold"}
-      [:a {:href "/posts.html"} "Posts"]]]
+      [:a {:href "/"} "Home"]]]
     [:div {:class "my-3"}
      body]]])
+
 
 (for [{:keys [link-path post-path body]} posts]
   (spit link-path (utils/convert-to (post-page body) :html)))

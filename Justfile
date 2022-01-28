@@ -16,7 +16,6 @@ for:
 
 build-html:
   #!/usr/bin/env bash
-  bb posts.clj
   bb index.clj
   bootleg milo.clj -o milo.html 
 

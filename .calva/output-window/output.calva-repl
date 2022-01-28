@@ -4,7 +4,7 @@
 ; Please see https://calva.io/output/ for more info.
 ; Happy coding! ♥️
 ; nREPL Connection was closed
-; Starting Jack-in Terminal: bb --nrepl-server 64819
+; Starting Jack-in Terminal: bb --nrepl-server 49495
 ; Hooking up nREPL sessions...
 ; Connected session: clj
 ; TIPS:
@@ -18,27 +18,12 @@ clj꞉user꞉> 
 ; Bad url: localhost:
 ; Jack-in done.
 clj꞉user꞉> 
-nil
-clj꞉posts꞉> 
-nil
-clj꞉index꞉> 
-nil
-clj꞉index꞉> 
-; clojure.lang.ExceptionInfo: Could not find namespace: pod.retrogradeorbit.bootleg.utils.
-clj꞉index꞉> 
-#:pod{:id "pod.retrogradeorbit.bootleg.glob"}
-clj꞉index꞉> 
-nil
-clj꞉index꞉> 
-nil
-clj꞉index꞉> 
+"Updated index"
 "Updated posts"
-nil
-clj꞉index꞉> 
 "posts/2022-01-28-objects-in-clojure.md"
+"posts/2022-01-28-subtyping-vs-inheritance.md"
 "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
 "posts/2017-02-17-dont-get-bored.md"
-(nil nil nil)
+(nil nil nil nil)
 clj꞉index꞉> 
-; clojure.lang.ExceptionInfo: Could not resolve symbol: post-page
-clj꞉index꞉> 
+; nREPL Connection was closed
