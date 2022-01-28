@@ -1,0 +1,3 @@
+- What's the difference between accidental and incidental state?
+    - The adjective __accidental__ means unintentional or happening by chance.
+    - The adjective __incidental__ means secondary or nonessential. It often refers to something that occurs in connection with a more important activity or event.

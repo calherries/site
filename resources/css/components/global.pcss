@@ -1,0 +1,35 @@
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply flex;
+    @apply flex-col;
+    font-family: 'Crimson Pro', serif;
+    font-size: 20px;
+    @apply max-w-screen-md;
+    @apply text-gray-800;
+  }
+  h1 {
+    font-family: 'cooper-black-std', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3.5em;
+    @apply leading-none;
+    margin: 0 0 2rem 0;
+  }
+  p {
+    @apply my-4;
+  }
+  ul {
+    @apply list-disc;
+    @apply pl-10;
+  }
+  a {
+    @apply border-b-2;
+    @apply border-gray-500;
+  }
+  code {
+    @apply text-sm;
+  }
+}
