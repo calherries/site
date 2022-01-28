@@ -4,6 +4,8 @@ Inheritance allows objects to re-use a subset of it's superclasses methods.
 
 Subtyping allows objects to be substituted for one another. A type is a subtype if it implements all the operations of the supertype.
 
+Let's see an example.
+
 Deque supports 4 operations:
 - insert-front
 - drop-front
@@ -11,13 +13,13 @@ Deque supports 4 operations:
 - drop-rear
 
 Stack can inherit from Deque:
-- insert-front -> can be renamed as push
-- drop-front -> can be renamed as pop
+- Deque.insert-front -> push
+- Deque.drop-front -> pop
 
 Queue can inherit from Deque:
-- insert-front -> can be renamed as insert
-- drop-rear -> can be renamed as delete
+- Deque.insert-front -> insert
+- Deque.drop-rear -> delete
 
-Stack and Queue inherit behaviour from Deque (albeit modifying it).
+So, Stack and Queue inherit behaviour from Deque.
 
-If the methods in Stack and Queue are not renamed, then Deque is a subtype of Stack and Queue.
+If the methods in Stack and Queue are named the same as Deque, then Deque is a subtype of Stack and Queue.
