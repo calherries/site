@@ -32,6 +32,6 @@ sync:
 
 deploy:
   just build-css-prod
-  fossil addremove
-  fossil ci -m "Built css" --allow-empty
-  fossil git export
+  git add -A
+  git commit -m "Deployment"
+  git push

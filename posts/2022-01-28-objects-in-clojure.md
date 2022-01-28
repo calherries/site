@@ -72,8 +72,9 @@ The Clojure "class" is just a function that returns a function. That returned fu
 object  method-name
    |       |
    |       |
+   .       .
 ((stack :push) 3)
-  ...........  |
+  ...........  .
        |       |
        |       |
        |       |
