@@ -1,4 +1,4 @@
-# Subtyping vs inheritance
+# Subtyping and inheritance
 
 Inheritance allows objects to re-use a subset of its superclasses' methods.
 

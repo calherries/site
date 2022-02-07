@@ -14,8 +14,14 @@
        (map string/capitalize)
        string/join))
 
-(def posts (for [post-path (fs/glob "." "posts/*.md")]
-             (let [title (-> post-path
+(def posts
+  (sort-by :date #(compare %2 %1)
+           (for [post-path (fs/glob "." "posts/*.md")]
+             (let [date  (-> post-path
+                             fs/file-name
+                             (->> (re-find #"^(\d{4}-\d{2}-\d{2})-(.*).md$"))
+                             second)
+                   title (-> post-path
                              fs/file-name
                              (->> (re-find #"^\d{4}-\d{2}-\d{2}-(.*).md$"))
                              second
@@ -23,9 +29,10 @@
                              capitalize-words)
                    link-path (string/replace post-path #".md$" ".html")]
                {:title title
+                :date  date
                 :link-path link-path
                 :post-path post-path
-                :body (markdown/markdown (str post-path))})))
+                :body (markdown/markdown (str post-path))}))))
 
 (def index-page
   [:html
@@ -44,12 +51,16 @@
     [:h1 {:style {:font-size "6em"
                   :margin "0"}} "Cal Herries"]
     [:pre [:code]] ; Hack for postcss to not purge these elements code
-    [:div {:class "my-3"}
-     (markdown/markdown "intro.md")]
-    [:ul
+    ;; [:div {:class "my-3"}
+    ;;  (markdown/markdown "intro.md")]
+    [:ul {:class "list-none px-0 my-5"}
+    ;; TODO: change this to be hard-coded
      (for [{:keys [title link-path]} posts]
        [:li
-        [:a {:href (str link-path)} title]])]]])
+        [:a {:href (str link-path)} title]])]
+    [:div {:class "my-5"}
+     [:div [:a {:href "/papers.html"} "Papers I love"]]
+     [:div [:a {:href "/books.html"} "Book shelf"]]]]])
 
 (spit "index.html" (utils/convert-to index-page :html))
 
@@ -78,9 +89,21 @@
     [:div {:class "my-3"}
      body]]])
 
-
-(for [{:keys [link-path post-path body]} posts]
+(doseq [{:keys [link-path post-path body]} posts]
   (spit link-path (utils/convert-to (post-page body) :html)))
 
 (prn "Updated posts")
 (doall (map (comp prn str) (fs/glob "." "posts/*.md")))
+
+;; Special pages
+
+(def page-names ["papers" "books"])
+
+(let [pages (for [page page-names]
+              {:link-path (str page ".html")
+               :body      (markdown/markdown (str page ".md"))})]
+  (doseq [{:keys [link-path body]} pages]
+    (spit link-path (utils/convert-to (post-page body) :html))))
+
+(prn "Updated pages")
+(doall (map (comp prn) page-names))
