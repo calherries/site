@@ -82,4 +82,4 @@ object  method-name
     method   method-argument
 ```
 
-There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's `class` symbol as syntactic sugar. Semantically, it creates a function. Of course there's more the `class` can do, like inheritance. We could implement with functions too, but that's for another post! 
+There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's `class` symbol as syntactic sugar. Semantically, it creates a function. The `class` symbol enables more than just object creation though. Inheritance and subtyping are two examples. But we could simulate these features in Clojure using dynamic dispatch. But that's for another post! 
