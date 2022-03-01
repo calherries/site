@@ -13,12 +13,12 @@ Deque supports 4 operations:
 - drop-rear
 
 Stack can inherit from Deque:
-- Deque.insert-front -> push
-- Deque.drop-front -> pop
+- push: call Deque.insert-front
+- pop: call Deque.drop-front
 
 Queue can inherit from Deque:
-- Deque.insert-front -> insert
-- Deque.drop-rear -> delete
+- insert: call Deque.insert-front
+- delete: call Deque.drop-rear
 
 Stack and Queue inherit behaviour from Deque.
 

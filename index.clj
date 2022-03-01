@@ -40,12 +40,11 @@
     [:link {:rel "stylesheet" :href "resources/public/css/app-utilities.css"}]
 
     [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css?family=Roboto+Slab:700"}]
-    [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"}]
+    [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"}]
     [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css?family=Crimson+Pro"}]
     [:link {:rel "stylesheet" :href "https://use.typekit.net/kxb8fhj.css"}]]
    [:body {:class "p-8"}
-    [:h1 {:style {:font-size "3em"
-                  :margin "0"}} "Cal Herries"]
+    [:h1 {:style {:margin "0"}} "Cal Herries"]
     [:pre [:code]] ; Hack for postcss to not purge these elements code
     [:ul {:class "list-none px-0 my-5"}
      (for [{:keys [title path]} posts]
@@ -71,7 +70,7 @@
     [:link {:rel "stylesheet" :href "../resources/public/css/app-utilities.css"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/github.css"}]
     [:link {:rel "stylesheet" :href "https://use.typekit.net/kxb8fhj.css"}]
-    [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap"}]
+    [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"}]
     [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css?family=Crimson+Pro"}]
     [:script {:src "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"}]
     [:script {:src "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/clojure.min.js"}]
