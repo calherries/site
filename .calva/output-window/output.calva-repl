@@ -3,7 +3,492 @@
 ;   when connected to a REPL session.
 ; Please see https://calva.io/output/ for more info.
 ; Happy coding! ♥️
-; Starting Jack-in Terminal: bb --nrepl-server 52759
+; Starting Jack-in Terminal: bb --nrepl-server 63311
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉user꞉>  ; Use `alt+enter` to evaluate
+; Bad url: localhost:
+; Jack-in done.
+clj꞉user꞉> 
+; clojure.lang.ExceptionInfo: No implementation of method: :as-file of protocol: #'clojure.java.io/Coercions found for class: clojure.lang.Symbol
+clj꞉index꞉> 
+nil
+clj꞉index꞉> 
+#'index/site-map
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: No implementation of method: :as-file of protocol: #'clojure.java.io/Coercions found for class: clojure.lang.Symbol
+clj꞉index꞉> 
+[{:date "2022-01-28",
+  :path "objects-in-clojure.html",
+  :source posts/objects-in-clojure.md,
+  :template :post,
+  :title "Objects in Clojure"}
+ {:date "2017-02-22",
+  :path "turning-20-in-the-age-of-uncertainty.html",
+  :source posts/turning-20-in-the-age-of-uncertainty.md,
+  :template :post,
+  :title "Turning 20 in the Age of Uncertainty"}
+ {:date "2017-02-17",
+  :path "dont-get-bored.html",
+  :source posts/dont-get-bored.md,
+  :template :post,
+  :title "Dont get Bored"}
+ {:date "2022-01-28",
+  :path "subtyping-and-inheritance.html",
+  :source posts/subtyping-and-inheritance.md,
+  :template :post,
+  :title "Subtyping and Inheritance"}]
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+[#object
+  [sun.nio.fs.UnixPath 0x74041b30 "posts/2022-01-28-objects-in-clojure.md"]
+ #object
+  [sun.nio.fs.UnixPath 0x4b2396d6
+   "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"]
+ #object [sun.nio.fs.UnixPath 0x6d386b4f "posts/2017-02-17-dont-get-bored.md"]
+ #object
+  [sun.nio.fs.UnixPath 0x1a87aeee
+   "posts/2022-01-28-subtyping-and-inheritance.md"]]
+clj꞉index꞉> 
+([:h1 "Objects in Clojure"]
+ [:p
+  "While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level."]
+ [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
+ [:p "Here's the Python implementation:"]
+ [:pre
+  [:code {:class "Python"}
+   "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
+ [:p]
+ [:p "And here's how we use it:"]
+ [:pre
+  [:code
+   "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
+ [:p "Straight-forward stuff. Now, how about Clojure?"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
+ [:p
+  "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
+ [:p]
+ [:p "Notice the similarity?"]
+ [:p
+  "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
+ [:pre
+  [:code {:class "Clojure"}
+   "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
+ [:p "There's no built-in " [:code "class"]
+  " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
+  [:code "class"]
+  " symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics "])
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+([:h1 "Objects in Clojure"]
+ [:p
+  "While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level."]
+ [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
+ [:p "Here's the Python implementation:"]
+ [:pre
+  [:code {:class "Python"}
+   "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
+ [:p]
+ [:p "And here's how we use it:"]
+ [:pre
+  [:code
+   "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
+ [:p "Straight-forward stuff. Now, how about Clojure?"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
+ [:p
+  "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
+ [:p]
+ [:p "Notice the similarity?"]
+ [:p
+  "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
+ [:pre
+  [:code {:class "Clojure"}
+   "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
+ [:p "There's no built-in " [:code "class"]
+  " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
+  [:code "class"]
+  " symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics "])
+clj꞉index꞉> 
+([:h1 "Objects in Clojure"]
+ [:p
+  "While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level."]
+ [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
+ [:p "Here's the Python implementation:"]
+ [:pre
+  [:code {:class "Python"}
+   "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
+ [:p]
+ [:p "And here's how we use it:"]
+ [:pre
+  [:code
+   "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
+ [:p "Straight-forward stuff. Now, how about Clojure?"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
+ [:p
+  "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
+ [:p]
+ [:p "Notice the similarity?"]
+ [:p
+  "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
+ [:pre
+  [:code {:class "Clojure"}
+   "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
+ [:p "There's no built-in " [:code "class"]
+  " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
+  [:code "class"]
+  " symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics "])
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+([:h1 "Objects in Clojure"]
+ [:p
+  "While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level."]
+ [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
+ [:p "Here's the Python implementation:"]
+ [:pre
+  [:code {:class "Python"}
+   "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
+ [:p]
+ [:p "And here's how we use it:"]
+ [:pre
+  [:code
+   "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
+ [:p "Straight-forward stuff. Now, how about Clojure?"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
+ [:p
+  "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
+ [:pre
+  [:code {:class "Clojure"}
+   "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
+ [:p]
+ [:p "Notice the similarity?"]
+ [:p
+  "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
+ [:pre
+  [:code {:class "Clojure"}
+   "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
+ [:p "There's no built-in " [:code "class"]
+  " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
+  [:code "class"]
+  " symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics "])
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: ./posts/objects-in-clojure.md (No such file or directory)
+clj꞉index꞉> 
+#'index/site-map
+clj꞉index꞉> 
+#'index/site-map
+clj꞉index꞉> 
+; clojure.lang.ExceptionInfo: Wrong number of args (2) passed to: clojure.core/assoc--5434
+clj꞉index꞉> 
+#'index/posts
+clj꞉index꞉> 
+({:body
+    ([:h1 "Objects in Clojure"]
+     [:p
+      "While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level."]
+     [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
+     [:p "Here's the Python implementation:"]
+     [:pre
+      [:code {:class "Python"}
+       "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
+     [:p]
+     [:p "And here's how we use it:"]
+     [:pre
+      [:code
+       "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
+     [:p "Straight-forward stuff. Now, how about Clojure?"]
+     [:pre
+      [:code {:class "Clojure"}
+       "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
+     [:p
+      "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
+     [:pre
+      [:code {:class "Clojure"}
+       "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
+     [:p]
+     [:p "Notice the similarity?"]
+     [:p
+      "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
+     [:pre
+      [:code {:class "Clojure"}
+       "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
+     [:p "There's no built-in " [:code "class"]
+      " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
+      [:code "class"]
+      " symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics "]),
+  :date "2022-01-28",
+  :path "objects-in-clojure.html",
+  :source "posts/2022-01-28-objects-in-clojure.md",
+  :template :post,
+  :title "Objects in Clojure"}
+ {:body
+    ([:h1 "Subtyping and inheritance"]
+     [:p
+      "Inheritance allows objects to re-use a subset of its superclasses' methods."]
+     [:p
+      "Subtyping allows objects to be substituted for one another. A type is a subtype if it implements all the operations of the supertype."]
+     [:p "Let's see an example."]
+     [:p "Deque supports 4 operations:"]
+     [:ul [:li "insert-front"] [:li "drop-front"] [:li "insert-rear"]
+      [:li "drop-rear"]]
+     [:p "Stack can inherit from Deque:"]
+     [:ul [:li "Deque.insert-front -&gt; push"]
+      [:li "Deque.drop-front -&gt; pop"]]
+     [:p "Queue can inherit from Deque:"]
+     [:ul [:li "Deque.insert-front -&gt; insert"]
+      [:li "Deque.drop-rear -&gt; delete"]]
+     [:p "Stack and Queue inherit behaviour from Deque."]
+     [:p
+      "But Stack and Queue are not subtypes, because they do not reimplement everything from Deque. Only a subset."]
+     [:p
+      "Deque would actually be a subtype of Stack and Queue if the methods were not renamed."]),
+  :date "2022-01-28",
+  :path "subtyping-and-inheritance.html",
+  :source "posts/2022-01-28-subtyping-and-inheritance.md",
+  :template :post,
+  :title "Subtyping and Inheritance"}
+ {:body
+    ([:h1 "Turning 20 in the age of uncertainty"]
+     [:p "I’m excited. You know why?"]
+     [:p
+      "Tomorrow, I’m turning 20 in a world when the future has never been more interesting."]
+     [:p
+      "First of all, the number of options open to a 20 year old like me is staggeringly high compared to my parents."]
+     [:p
+      "Second of all, these options are only going to increase. In the day I turn 20, 650,000 people will gain access to the internet for the first time. That makes almost 4.5 billion internet users worldwide. A great number of these people will create new markets, new companies, new industries, new career pathways, new product categories, and new technological breakthroughs that will no doubt have an impact on my life."]
+     [:p
+      "Considering the current state of the world, you might be tempted to call the era we live in the Age of the Internet. But I think that’s missing the point. The biggest impact of the internet on the world so far has been rapid, consistent, and unpredictable disruption. More accurately, we are living in the "
+      [:em "Age of Uncertainty."]]
+     [:p
+      "These days, the only thing you can predict about the world is that the future will be very different."]
+     [:p
+      "So, to celebrate my 20th Birthday, I’ve decided to make this post into a bunch of predictions about the future of the world and myself. Think of it like a reverse time-capsule!"]
+     [:p
+      "Here are a few big things I can be pretty certain will happen in my working lifetime:"]
+     [:ul
+      [:li "The economic landscape of the world is going to be " [:em "very "]
+       "different. By the time I turn 60, India’s GPD might be larger than that of the United States. China’s might be double."]
+      [:li
+       "The U.S. will no longer have a monopoly on the world’s most innovative companies. Chinese tech giants like Baidu and Tencent are already hinting at a new future of technology in the East."]
+      [:li
+       "There will be a huge shift in political power. The political landscape has stayed relatively stable since the Cold War era, but that is likely to change as developing countries grow wealthier."]
+      [:li
+       "Muslims will outnumber Christians, and Atheists will be less as a percentage of the population than today."]
+      [:li "There will be waaaaay more vegans. It’s " [:strong "not"]
+       " just a fad, guys."]
+      [:li
+       "Advancements in artificial intelligence will keep being developed. Given the recent upsurge in popularity of AI courses at Universities like Stanford and Harvard, we can expect some real breakthroughs in the next 10 years. Whether or not you believe a superintelligent AI is possible, there is no doubt that many cognitive tasks will continue to be automated at an accelerating pace."]
+      [:li
+       "I won’t have to drive to work, and I won’t need to own a car. Self-driving cars "
+       [:em "will "] "work, and it " [:em "will "]
+       "be cheaper to not own one. This is pretty huge for our cities. 14 percent of Los Angeles is devoted to car storage at the moment."]
+      [:li
+       "South East Asia will be a lot more expensive to travel to. Rapidly rising incomes and fast improving political institutions mean that $2 per night accommodation won’t stick around for long. Ever more reason to go there when I’m 20!"]
+      [:li
+       "The health-care and education system will continue to get less productive and more expensive. New technology may or may not displace them."]
+      [:li
+       "Many developed countries will have to go through major economic restructurings to pay off their debts. The now-common combination of a democratic, capitalist country with a cradle-to-grave welfare state may be an outlier in 50 years time."]
+      [:li
+       "Entertainment will become more addictive, and so will food. (Just consider how many people are currently employed to make sure this happens.)"]
+      [:li "Online education will skyrocket. This is 100% going to happen."]
+      [:li
+       "As people get richer, the number of high-quality artisan products will go through the roof. As the barrier to entry for new businesses drops, the number of freelancers will continue to climb."]
+      [:li
+       "Warren Buffett will die. 99% of his wealth will go to charity as promised, and millions of lives will be touched."]]
+     [:p
+      "The good thing is, none of these things scare me too much. A lot of them are pretty exciting to consider."]
+     [:p
+      "But the most interesting parts of the future lie where I can’t see. When making predictions about the future, the unknown is often more important than the known."]
+     [:p "Here are some things that " [:strong "might "]
+      "happen in my lifetime:"]
+     [:ul
+      [:li
+       "We could develop superintelligent AI that makes us so productive that most of us don’t need to work anymore. On the other hand, it could kill a lot of us too."]
+      [:li
+       "We could develop the ability to harvest the power of fusion energy. On the other hand, we could have a nuclear war."]
+      [:li
+       "We could find a cure for HIV. Malaria might be a forgotten disease. Cancer, diabetes, and Alzheimer’s might be too."]
+      [:li
+       "We could have a worldwide epidemic on a scale the human race has never seen. This one scares the hell out of Bill Gates, so I’m willing to listen."]
+      [:li
+       "Automation could lead to a huge abundance of resources for all. On the other hand, automation could create an unprecedented amount of poverty for the unskilled."]
+      [:li
+       "We might get really good at using CRISPR, and start editing our children’s DNA. If this happens, expect a lot of family feuds."]
+      [:li
+       "We might all stop eating animal meat and switch to plant-based meat. This would be like a second agricultural revolution. It would also free up enormous quantities of land for reforestation."]
+      [:li
+       "Nanotechnology might completely disrupt the manufacturing industry and lead to a world of radical abundance. Read Eric Drexler’s "
+       [:a {:href "http://metamodern.com/about-the-author/"} "stuff"]
+       ". It’s huge."]
+      [:li
+       "Growth may continue to be slow throughout the Western World. This would be extremely troubling for our political institutions. I would not expect the U.S. or European systems of government to last 40 years under the current economic strain."]
+      [:li
+       "We could have a climatic catastrophe, and millions of people might starve to death."]
+      [:li
+       "We could establish a small colony on mars. Wouldn’t that be wicked?"]
+      [:li
+       "My children might have vastly better educational opportunities outside of University."]
+      [:li
+       "We could solve a lot of the problems related to ageing, and a decent amount of us might live to 150 or so. The resulting demographic shift could have a bigger economic impact than any of the above."]]
+     [:p "That doesn’t sound like a very positive future to you?"]
+     [:p
+      "Well, that is partially true. Whatever changes you see in the future, you can be assured some of them will have very negative consequences. This has always been true."]
+     [:p
+      "But the above possibilities for the next 40, 50, 60 years is bloody interesting from the passive observer’s point of view. If you thought the Bachelor NZ was the best reality T.V. show ever, just wait until you watch the documentaries of 2100."]
+     [:p
+      "If the shit really hits the fan, I can always walk into the bush and join the "
+      [:a {:href "https://www.youtube.com/watch?v=3C79_YGvCLQ"} "Wilderpeople"]
+      ". Hopefully they’ll still have Wi-Fi so I can read this blog post."]),
+  :date "2017-02-22",
+  :path "turning-20-in-the-age-of-uncertainty.html",
+  :source "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md",
+  :template :post,
+  :title "Turning 20 in the Age of Uncertainty"}
+ {:body
+    ([:h1 "Dont get bored"]
+     [:p "That's a heuristic I like the sound of."]
+     [:p
+      "Today was the end of a major chapter in my life: my first job working for a tech start-up."]
+     [:p
+      "As I look for my next adventure, I’ve realised I have more opportunities than ever before to craft the lifestyle that I want. But with great opportunities comes greater potential to miss them."]
+     [:p
+      "As we parted after Friday drinks, my now former boss gave me some advice I don’t want to forget. “"
+      [:em "Whatever you do, don’t let yourself get bored.”"]]
+     [:p
+      "Wow, I thought. I’ve never thought of avoiding boredom as a heuristic for decision making. Yet here’s evidence of a man who’s lived his life doing things that interest him, and it’s got him somewhere. I doubt that many people achieve that."]
+     [:p
+      "The important thing to note is that he is making a negative claim about what you "
+      [:em "should not "] "do, instead of a positive claim about what you "
+      [:em "should "]
+      "do. The above statement is very different from saying, “Whatever you do, do what interests you most”. I can still pursue things like success, money and social influence if I feel like that’s important, but it cannot come at the expense of being getting bored with life."]
+     [:p
+      "When you think about it, what would you trade for a life of boredom? How much would you be willing to earn for a dull life? Is it possible to be happy if you are bored?"]
+     [:p
+      "Imagine living your life not following money, not hedonism, not success, not fame or fortune, but just avoiding getting stuck in a position that loses your interest. What would that life look like?"]),
+  :date "2017-02-17",
+  :path "dont-get-bored.html",
+  :source "posts/2017-02-17-dont-get-bored.md",
+  :template :post,
+  :title "Dont get Bored"})
+clj꞉index꞉> 
+"Updated index"
+nil
+clj꞉index꞉> 
+"Updated index"
+#'index/post-page
+clj꞉index꞉> 
+"Updated index"
+"Updated posts"
+"posts/2022-01-28-objects-in-clojure.md"
+"posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
+"posts/2017-02-17-dont-get-bored.md"
+"posts/2022-01-28-subtyping-and-inheritance.md"
+"Updated pages"
+"papers"
+"books"
+(nil nil)
+clj꞉index꞉> 
+"Updated index"
+"Updated posts"
+"posts/2022-01-28-objects-in-clojure.md"
+"posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
+"posts/2017-02-17-dont-get-bored.md"
+"posts/2022-01-28-subtyping-and-inheritance.md"
+"Updated pages"
+"papers"
+"books"
+(nil nil)
+clj꞉index꞉> 
+[{:date "2022-01-28",
+  :path "posts/objects-in-clojure.html",
+  :source "posts/2022-01-28-objects-in-clojure.md",
+  :template :post,
+  :title "Objects in Clojure"}
+ {:date "2017-02-22",
+  :path "posts/turning-20-in-the-age-of-uncertainty.html",
+  :source "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md",
+  :template :post,
+  :title "Turning 20 in the Age of Uncertainty"}
+ {:date "2017-02-17",
+  :path "posts/dont-get-bored.html",
+  :source "posts/2017-02-17-dont-get-bored.md",
+  :template :post,
+  :title "Dont get Bored"}
+ {:date "2022-01-28",
+  :path "posts/subtyping-and-inheritance.html",
+  :source "posts/2022-01-28-subtyping-and-inheritance.md",
+  :template :post,
+  :title "Subtyping and Inheritance"}]
+clj꞉index꞉> 
+"Updated index"
+"Updated posts"
+"posts/2022-01-28-objects-in-clojure.md"
+"posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
+"posts/2017-02-17-dont-get-bored.md"
+"posts/2022-01-28-subtyping-and-inheritance.md"
+#'index/page-names
+clj꞉index꞉> 
+"Updated index"
+"Updated posts"
+"posts/2022-01-28-objects-in-clojure.md"
+"posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
+"posts/2017-02-17-dont-get-bored.md"
+"posts/2022-01-28-subtyping-and-inheritance.md"
+"Updated pages"
+"papers"
+"books"
+(nil nil)
+clj꞉index꞉> 
+"Updated index"
+"Updated posts"
+"posts/2022-01-28-objects-in-clojure.md"
+"posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
+"posts/2017-02-17-dont-get-bored.md"
+"posts/2022-01-28-subtyping-and-inheritance.md"
+"Updated pages"
+"papers"
+"books"
+(nil nil)
+clj꞉index꞉> 
+; Jacking in...
+; nREPL Connection was closed
+; Starting Jack-in Terminal: bb --nrepl-server 63439
 ; Hooking up nREPL sessions...
 ; Connected session: clj
 ; TIPS:
@@ -17,803 +502,14 @@ clj꞉user꞉> 
 ; Bad url: localhost:
 ; Jack-in done.
 clj꞉user꞉> 
-nil
-clj꞉index꞉> 
-#'index/pages
-clj꞉index꞉> 
 "Updated index"
 "Updated posts"
 "posts/2022-01-28-objects-in-clojure.md"
 "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
 "posts/2017-02-17-dont-get-bored.md"
 "posts/2022-01-28-subtyping-and-inheritance.md"
-(nil nil nil nil)
-clj꞉index꞉> 
-; clojure.lang.ExceptionInfo: ./pages.md (No such file or directory)
-clj꞉index꞉> 
-#'index/pages
-clj꞉index꞉> 
-({:body (), :link-path "papers.html"} {:body (), :link-path "books.html"})
-clj꞉index꞉> 
-({:body
-    ([:h1 "Papers I Love"]
-     [:p
-      [:a {:href "http://curtclifton.net/papers/MoseleyMarks06a.pdf"}
-       "Out of the Tar Pit"] " "
-      [:a {:href "https://www.cs.utexas.edu/~wcook/Drafts/2009/essay.pdf"}
-       "On Understanding Data Abstraction, Revisited"] " "
-      [:a
-       {:href
-          "file:///Users/callumherries/Downloads/axiomatic-basis-computer-programming.pdf"}
-       "An Axiomatic Basis for Computer Programming"] " "
-      [:a
-       {:href "http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.117.695"}
-       "On understanding types, data abstraction, and polymorphism"] " "
-      [:a
-       {:href "http://se.inf.ethz.ch/~meyer/publications/old/dbc_chapter.pdf"}
-       "Design by Contract"] " "
-      [:a
-       {:href
-          "https://kar.kent.ac.uk/21504/3/Higher-order_+_Polymorphic_=_Reusable.pdf"}
-       "Higher order + Polymorphic = Reusable"]]),
-  :link-path "papers.html"}
- {:body
-    ([:h1 "Books"]
-     [:p
-      [:a
-       {:href
-          "https://www.amazon.com/Concepts-Techniques-Models-Computer-Programming/dp/0262220695"}
-       "Concepts, Techniques, and Models of Computer Programming"] " "
-      [:a {:href "https://sarabander.github.io/sicp/"}
-       "Structured Interpretation of Computer Programs"] " "
-      [:a
-       {:href
-          "https://github.com/clojurians-org/clojure-ebook-2/blob/master/The%20Joy%20of%20Clojure%2C%202nd%20Edition.pdf"}
-       "Joy of Clojure"] " "
-      [:a {:href "https://elementsofclojure.com/"} "Elements of Clojure"] " "
-      [:a {:href "http://curtclifton.net/papers/MoseleyMarks06a.pdf"}
-       "Out of the Tar Pit"] " "
-      [:a {:href "https://www.cs.utexas.edu/~wcook/Drafts/2009/essay.pdf"}
-       "On Understanding Data Abstraction, Revisited"]]),
-  :link-path "books.html"})
-clj꞉index꞉> 
-({:body
-    ([:h1 "Papers I Love"]
-     [:p
-      [:a {:href "http://curtclifton.net/papers/MoseleyMarks06a.pdf"}
-       "Out of the Tar Pit"] " "
-      [:a {:href "https://www.cs.utexas.edu/~wcook/Drafts/2009/essay.pdf"}
-       "On Understanding Data Abstraction, Revisited"] " "
-      [:a
-       {:href
-          "file:///Users/callumherries/Downloads/axiomatic-basis-computer-programming.pdf"}
-       "An Axiomatic Basis for Computer Programming"] " "
-      [:a
-       {:href "http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.117.695"}
-       "On understanding types, data abstraction, and polymorphism"] " "
-      [:a
-       {:href "http://se.inf.ethz.ch/~meyer/publications/old/dbc_chapter.pdf"}
-       "Design by Contract"] " "
-      [:a
-       {:href
-          "https://kar.kent.ac.uk/21504/3/Higher-order_+_Polymorphic_=_Reusable.pdf"}
-       "Higher order + Polymorphic = Reusable"]]),
-  :link-path "papers.html"}
- {:body
-    ([:h1 "Books"]
-     [:p
-      [:a
-       {:href
-          "https://www.amazon.com/Concepts-Techniques-Models-Computer-Programming/dp/0262220695"}
-       "Concepts, Techniques, and Models of Computer Programming"] " "
-      [:a {:href "https://sarabander.github.io/sicp/"}
-       "Structured Interpretation of Computer Programs"] " "
-      [:a
-       {:href
-          "https://github.com/clojurians-org/clojure-ebook-2/blob/master/The%20Joy%20of%20Clojure%2C%202nd%20Edition.pdf"}
-       "Joy of Clojure"] " "
-      [:a {:href "https://elementsofclojure.com/"} "Elements of Clojure"] " "
-      [:a {:href "http://curtclifton.net/papers/MoseleyMarks06a.pdf"}
-       "Out of the Tar Pit"] " "
-      [:a {:href "https://www.cs.utexas.edu/~wcook/Drafts/2009/essay.pdf"}
-       "On Understanding Data Abstraction, Revisited"]]),
-  :link-path "books.html"})
-clj꞉index꞉> 
-({:body
-    ([:h1 "Papers I Love"]
-     [:p
-      [:a {:href "http://curtclifton.net/papers/MoseleyMarks06a.pdf"}
-       "Out of the Tar Pit"] " "
-      [:a {:href "https://www.cs.utexas.edu/~wcook/Drafts/2009/essay.pdf"}
-       "On Understanding Data Abstraction, Revisited"] " "
-      [:a
-       {:href
-          "file:///Users/callumherries/Downloads/axiomatic-basis-computer-programming.pdf"}
-       "An Axiomatic Basis for Computer Programming"] " "
-      [:a
-       {:href "http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.117.695"}
-       "On understanding types, data abstraction, and polymorphism"] " "
-      [:a
-       {:href "http://se.inf.ethz.ch/~meyer/publications/old/dbc_chapter.pdf"}
-       "Design by Contract"] " "
-      [:a
-       {:href
-          "https://kar.kent.ac.uk/21504/3/Higher-order_+_Polymorphic_=_Reusable.pdf"}
-       "Higher order + Polymorphic = Reusable"]]),
-  :link-path "papers.html"}
- {:body
-    ([:h1 "Books"]
-     [:p
-      [:a
-       {:href
-          "https://www.amazon.com/Concepts-Techniques-Models-Computer-Programming/dp/0262220695"}
-       "Concepts, Techniques, and Models of Computer Programming"] " "
-      [:a {:href "https://sarabander.github.io/sicp/"}
-       "Structured Interpretation of Computer Programs"] " "
-      [:a
-       {:href
-          "https://github.com/clojurians-org/clojure-ebook-2/blob/master/The%20Joy%20of%20Clojure%2C%202nd%20Edition.pdf"}
-       "Joy of Clojure"] " "
-      [:a {:href "https://elementsofclojure.com/"} "Elements of Clojure"] " "
-      [:a {:href "http://curtclifton.net/papers/MoseleyMarks06a.pdf"}
-       "Out of the Tar Pit"] " "
-      [:a {:href "https://www.cs.utexas.edu/~wcook/Drafts/2009/essay.pdf"}
-       "On Understanding Data Abstraction, Revisited"]]),
-  :link-path "books.html"})
-clj꞉index꞉> 
-#'index/page-names
-clj꞉index꞉> 
-(nil nil)
-clj꞉index꞉> 
 "Updated pages"
-nil
-clj꞉index꞉> 
 "papers"
 "books"
 (nil nil)
-clj꞉index꞉> 
-({:body
-    ([:h1 "Objects in Clojure"]
-     [:p
-      "Objects are functions. Every functional programming language can implement them, even if they're not supported at the language level."]
-     [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
-     [:p "Here's the Python implementation:"]
-     [:pre
-      [:code {:class "Python"}
-       "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
-     [:p]
-     [:p "And here's how we use it:"]
-     [:pre
-      [:code
-       "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
-     [:p "Straight-forward stuff. Now, how about Clojure?"]
-     [:pre
-      [:code {:class "Clojure"}
-       "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
-     [:p
-      "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
-     [:pre
-      [:code {:class "Clojure"}
-       "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
-     [:p]
-     [:p "Notice the similarity?"]
-     [:p
-      "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
-     [:pre
-      [:code {:class "Clojure"}
-       "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
-     [:p "There's no built-in " [:code "class"]
-      " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
-      [:code "class"]
-      " symbol as syntactic sugar. Semantically, it creates a function. Of course there's more the "
-      [:code "class"]
-      " can do, like inheritance. We could implement with functions too, but that's for another post! "]),
-  :link-path "posts/2022-01-28-objects-in-clojure.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x41a1e38f
-               "posts/2022-01-28-objects-in-clojure.md"],
-  :title "Objects In Clojure"}
- {:body
-    ([:h1 "Turning 20 in the age of uncertainty"]
-     [:p "I’m excited. You know why?"]
-     [:p
-      "Tomorrow, I’m turning 20 in a world when the future has never been more interesting."]
-     [:p
-      "First of all, the number of options open to a 20 year old like me is staggeringly high compared to my parents."]
-     [:p
-      "Second of all, these options are only going to increase. In the day I turn 20, 650,000 people will gain access to the internet for the first time. That makes almost 4.5 billion internet users worldwide. A great number of these people will create new markets, new companies, new industries, new career pathways, new product categories, and new technological breakthroughs that will no doubt have an impact on my life."]
-     [:p
-      "Considering the current state of the world, you might be tempted to call the era we live in the Age of the Internet. But I think that’s missing the point. The biggest impact of the internet on the world so far has been rapid, consistent, and unpredictable disruption. More accurately, we are living in the "
-      [:em "Age of Uncertainty."]]
-     [:p
-      "These days, the only thing you can predict about the world is that the future will be very different."]
-     [:p
-      "So, to celebrate my 20th Birthday, I’ve decided to make this post into a bunch of predictions about the future of the world and myself. Think of it like a reverse time-capsule!"]
-     [:p
-      "Here are a few big things I can be pretty certain will happen in my working lifetime:"]
-     [:ul
-      [:li "The economic landscape of the world is going to be " [:em "very "]
-       "different. By the time I turn 60, India’s GPD might be larger than that of the United States. China’s might be double."]
-      [:li
-       "The U.S. will no longer have a monopoly on the world’s most innovative companies. Chinese tech giants like Baidu and Tencent are already hinting at a new future of technology in the East."]
-      [:li
-       "There will be a huge shift in political power. The political landscape has stayed relatively stable since the Cold War era, but that is likely to change as developing countries grow wealthier."]
-      [:li
-       "Muslims will outnumber Christians, and Atheists will be less as a percentage of the population than today."]
-      [:li "There will be waaaaay more vegans. It’s " [:strong "not"]
-       " just a fad, guys."]
-      [:li
-       "Advancements in artificial intelligence will keep being developed. Given the recent upsurge in popularity of AI courses at Universities like Stanford and Harvard, we can expect some real breakthroughs in the next 10 years. Whether or not you believe a superintelligent AI is possible, there is no doubt that many cognitive tasks will continue to be automated at an accelerating pace."]
-      [:li
-       "I won’t have to drive to work, and I won’t need to own a car. Self-driving cars "
-       [:em "will "] "work, and it " [:em "will "]
-       "be cheaper to not own one. This is pretty huge for our cities. 14 percent of Los Angeles is devoted to car storage at the moment."]
-      [:li
-       "South East Asia will be a lot more expensive to travel to. Rapidly rising incomes and fast improving political institutions mean that $2 per night accommodation won’t stick around for long. Ever more reason to go there when I’m 20!"]
-      [:li
-       "The health-care and education system will continue to get less productive and more expensive. New technology may or may not displace them."]
-      [:li
-       "Many developed countries will have to go through major economic restructurings to pay off their debts. The now-common combination of a democratic, capitalist country with a cradle-to-grave welfare state may be an outlier in 50 years time."]
-      [:li
-       "Entertainment will become more addictive, and so will food. (Just consider how many people are currently employed to make sure this happens.)"]
-      [:li "Online education will skyrocket. This is 100% going to happen."]
-      [:li
-       "As people get richer, the number of high-quality artisan products will go through the roof. As the barrier to entry for new businesses drops, the number of freelancers will continue to climb."]
-      [:li
-       "Warren Buffett will die. 99% of his wealth will go to charity as promised, and millions of lives will be touched."]]
-     [:p
-      "The good thing is, none of these things scare me too much. A lot of them are pretty exciting to consider."]
-     [:p
-      "But the most interesting parts of the future lie where I can’t see. When making predictions about the future, the unknown is often more important than the known."]
-     [:p "Here are some things that " [:strong "might "]
-      "happen in my lifetime:"]
-     [:ul
-      [:li
-       "We could develop superintelligent AI that makes us so productive that most of us don’t need to work anymore. On the other hand, it could kill a lot of us too."]
-      [:li
-       "We could develop the ability to harvest the power of fusion energy. On the other hand, we could have a nuclear war."]
-      [:li
-       "We could find a cure for HIV. Malaria might be a forgotten disease. Cancer, diabetes, and Alzheimer’s might be too."]
-      [:li
-       "We could have a worldwide epidemic on a scale the human race has never seen. This one scares the hell out of Bill Gates, so I’m willing to listen."]
-      [:li
-       "Automation could lead to a huge abundance of resources for all. On the other hand, automation could create an unprecedented amount of poverty for the unskilled."]
-      [:li
-       "We might get really good at using CRISPR, and start editing our children’s DNA. If this happens, expect a lot of family feuds."]
-      [:li
-       "We might all stop eating animal meat and switch to plant-based meat. This would be like a second agricultural revolution. It would also free up enormous quantities of land for reforestation."]
-      [:li
-       "Nanotechnology might completely disrupt the manufacturing industry and lead to a world of radical abundance. Read Eric Drexler’s "
-       [:a {:href "http://metamodern.com/about-the-author/"} "stuff"]
-       ". It’s huge."]
-      [:li
-       "Growth may continue to be slow throughout the Western World. This would be extremely troubling for our political institutions. I would not expect the U.S. or European systems of government to last 40 years under the current economic strain."]
-      [:li
-       "We could have a climatic catastrophe, and millions of people might starve to death."]
-      [:li
-       "We could establish a small colony on mars. Wouldn’t that be wicked?"]
-      [:li
-       "My children might have vastly better educational opportunities outside of University."]
-      [:li
-       "We could solve a lot of the problems related to ageing, and a decent amount of us might live to 150 or so. The resulting demographic shift could have a bigger economic impact than any of the above."]]
-     [:p "That doesn’t sound like a very positive future to you?"]
-     [:p
-      "Well, that is partially true. Whatever changes you see in the future, you can be assured some of them will have very negative consequences. This has always been true."]
-     [:p
-      "But the above possibilities for the next 40, 50, 60 years is bloody interesting from the passive observer’s point of view. If you thought the Bachelor NZ was the best reality T.V. show ever, just wait until you watch the documentaries of 2100."]
-     [:p
-      "If the shit really hits the fan, I can always walk into the bush and join the "
-      [:a {:href "https://www.youtube.com/watch?v=3C79_YGvCLQ"} "Wilderpeople"]
-      ". Hopefully they’ll still have Wi-Fi so I can read this blog post."]),
-  :link-path "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x7d700ce7
-               "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"],
-  :title "Turning 20 In The Age Of Uncertainty"}
- {:body
-    ([:h1 "Dont get bored"]
-     [:p "That's a heuristic I like the sound of."]
-     [:p
-      "Today was the end of a major chapter in my life: my first job working for a tech start-up."]
-     [:p
-      "As I look for my next adventure, I’ve realised I have more opportunities than ever before to craft the lifestyle that I want. But with great opportunities comes greater potential to miss them."]
-     [:p
-      "As we parted after Friday drinks, my now former boss gave me some advice I don’t want to forget. “"
-      [:em "Whatever you do, don’t let yourself get bored.”"]]
-     [:p
-      "Wow, I thought. I’ve never thought of avoiding boredom as a heuristic for decision making. Yet here’s evidence of a man who’s lived his life doing things that interest him, and it’s got him somewhere. I doubt that many people achieve that."]
-     [:p
-      "The important thing to note is that he is making a negative claim about what you "
-      [:em "should not "] "do, instead of a positive claim about what you "
-      [:em "should "]
-      "do. The above statement is very different from saying, “Whatever you do, do what interests you most”. I can still pursue things like success, money and social influence if I feel like that’s important, but it cannot come at the expense of being getting bored with life."]
-     [:p
-      "When you think about it, what would you trade for a life of boredom? How much would you be willing to earn for a dull life? Is it possible to be happy if you are bored?"]
-     [:p
-      "Imagine living your life not following money, not hedonism, not success, not fame or fortune, but just avoiding getting stuck in a position that loses your interest. What would that life look like?"]),
-  :link-path "posts/2017-02-17-dont-get-bored.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x4790c7c2
-               "posts/2017-02-17-dont-get-bored.md"],
-  :title "Dont Get Bored"}
- {:body
-    ([:h1 "Subtyping and inheritance"]
-     [:p
-      "Inheritance allows objects to re-use a subset of its superclasses' methods."]
-     [:p
-      "Subtyping allows objects to be substituted for one another. A type is a subtype if it implements all the operations of the supertype."]
-     [:p "Let's see an example."]
-     [:p "Deque supports 4 operations:"]
-     [:ul [:li "insert-front"] [:li "drop-front"] [:li "insert-rear"]
-      [:li "drop-rear"]]
-     [:p "Stack can inherit from Deque:"]
-     [:ul [:li "Deque.insert-front -&gt; push"]
-      [:li "Deque.drop-front -&gt; pop"]]
-     [:p "Queue can inherit from Deque:"]
-     [:ul [:li "Deque.insert-front -&gt; insert"]
-      [:li "Deque.drop-rear -&gt; delete"]]
-     [:p "Stack and Queue inherit behaviour from Deque."]
-     [:p
-      "But Stack and Queue are not subtypes, because they do not reimplement everything from Deque. Only a subset."]
-     [:p
-      "Deque would actually be a subtype of Stack and Queue if the methods were not renamed."]),
-  :link-path "posts/2022-01-28-subtyping-and-inheritance.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x4664f57c
-               "posts/2022-01-28-subtyping-and-inheritance.md"],
-  :title "Subtyping And Inheritance"})
-clj꞉index꞉> 
-({:title "Objects In Clojure"}
- {:title "Turning 20 In The Age Of Uncertainty"}
- {:title "Dont Get Bored"}
- {:title "Subtyping And Inheritance"})
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:title "Dont Get Bored"}
- {:title "Objects In Clojure"}
- {:title "Subtyping And Inheritance"}
- {:title "Turning 20 In The Age Of Uncertainty"})
-clj꞉index꞉> 
-({:title "Dont Get Bored"}
- {:title "Objects In Clojure"}
- {:title "Subtyping And Inheritance"}
- {:title "Turning 20 In The Age Of Uncertainty"})
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:date "2017-02-17-dont-get-bored.md", :title "Dont Get Bored"}
- {:date "2022-01-28-objects-in-clojure.md", :title "Objects In Clojure"}
- {:date "2022-01-28-subtyping-and-inheritance.md",
-  :title "Subtyping And Inheritance"}
- {:date "2017-02-22-turning-20-in-the-age-of-uncertainty.md",
-  :title "Turning 20 In The Age Of Uncertainty"})
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:date "2017-02-17", :title "Dont Get Bored"}
- {:date "2022-01-28", :title "Objects In Clojure"}
- {:date "2022-01-28", :title "Subtyping And Inheritance"}
- {:date "2017-02-22", :title "Turning 20 In The Age Of Uncertainty"})
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:date "2022-01-28", :title "Objects In Clojure"}
- {:date "2017-02-22", :title "Turning 20 In The Age Of Uncertainty"}
- {:date "2017-02-17", :title "Dont Get Bored"}
- {:date "2022-01-28", :title "Subtyping And Inheritance"})
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:body
-    ([:h1 "Dont get bored"]
-     [:p "That's a heuristic I like the sound of."]
-     [:p
-      "Today was the end of a major chapter in my life: my first job working for a tech start-up."]
-     [:p
-      "As I look for my next adventure, I’ve realised I have more opportunities than ever before to craft the lifestyle that I want. But with great opportunities comes greater potential to miss them."]
-     [:p
-      "As we parted after Friday drinks, my now former boss gave me some advice I don’t want to forget. “"
-      [:em "Whatever you do, don’t let yourself get bored.”"]]
-     [:p
-      "Wow, I thought. I’ve never thought of avoiding boredom as a heuristic for decision making. Yet here’s evidence of a man who’s lived his life doing things that interest him, and it’s got him somewhere. I doubt that many people achieve that."]
-     [:p
-      "The important thing to note is that he is making a negative claim about what you "
-      [:em "should not "] "do, instead of a positive claim about what you "
-      [:em "should "]
-      "do. The above statement is very different from saying, “Whatever you do, do what interests you most”. I can still pursue things like success, money and social influence if I feel like that’s important, but it cannot come at the expense of being getting bored with life."]
-     [:p
-      "When you think about it, what would you trade for a life of boredom? How much would you be willing to earn for a dull life? Is it possible to be happy if you are bored?"]
-     [:p
-      "Imagine living your life not following money, not hedonism, not success, not fame or fortune, but just avoiding getting stuck in a position that loses your interest. What would that life look like?"]),
-  :date "2017-02-17",
-  :link-path "posts/2017-02-17-dont-get-bored.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x1b23b818
-               "posts/2017-02-17-dont-get-bored.md"],
-  :title "Dont Get Bored"}
- {:body
-    ([:h1 "Turning 20 in the age of uncertainty"]
-     [:p "I’m excited. You know why?"]
-     [:p
-      "Tomorrow, I’m turning 20 in a world when the future has never been more interesting."]
-     [:p
-      "First of all, the number of options open to a 20 year old like me is staggeringly high compared to my parents."]
-     [:p
-      "Second of all, these options are only going to increase. In the day I turn 20, 650,000 people will gain access to the internet for the first time. That makes almost 4.5 billion internet users worldwide. A great number of these people will create new markets, new companies, new industries, new career pathways, new product categories, and new technological breakthroughs that will no doubt have an impact on my life."]
-     [:p
-      "Considering the current state of the world, you might be tempted to call the era we live in the Age of the Internet. But I think that’s missing the point. The biggest impact of the internet on the world so far has been rapid, consistent, and unpredictable disruption. More accurately, we are living in the "
-      [:em "Age of Uncertainty."]]
-     [:p
-      "These days, the only thing you can predict about the world is that the future will be very different."]
-     [:p
-      "So, to celebrate my 20th Birthday, I’ve decided to make this post into a bunch of predictions about the future of the world and myself. Think of it like a reverse time-capsule!"]
-     [:p
-      "Here are a few big things I can be pretty certain will happen in my working lifetime:"]
-     [:ul
-      [:li "The economic landscape of the world is going to be " [:em "very "]
-       "different. By the time I turn 60, India’s GPD might be larger than that of the United States. China’s might be double."]
-      [:li
-       "The U.S. will no longer have a monopoly on the world’s most innovative companies. Chinese tech giants like Baidu and Tencent are already hinting at a new future of technology in the East."]
-      [:li
-       "There will be a huge shift in political power. The political landscape has stayed relatively stable since the Cold War era, but that is likely to change as developing countries grow wealthier."]
-      [:li
-       "Muslims will outnumber Christians, and Atheists will be less as a percentage of the population than today."]
-      [:li "There will be waaaaay more vegans. It’s " [:strong "not"]
-       " just a fad, guys."]
-      [:li
-       "Advancements in artificial intelligence will keep being developed. Given the recent upsurge in popularity of AI courses at Universities like Stanford and Harvard, we can expect some real breakthroughs in the next 10 years. Whether or not you believe a superintelligent AI is possible, there is no doubt that many cognitive tasks will continue to be automated at an accelerating pace."]
-      [:li
-       "I won’t have to drive to work, and I won’t need to own a car. Self-driving cars "
-       [:em "will "] "work, and it " [:em "will "]
-       "be cheaper to not own one. This is pretty huge for our cities. 14 percent of Los Angeles is devoted to car storage at the moment."]
-      [:li
-       "South East Asia will be a lot more expensive to travel to. Rapidly rising incomes and fast improving political institutions mean that $2 per night accommodation won’t stick around for long. Ever more reason to go there when I’m 20!"]
-      [:li
-       "The health-care and education system will continue to get less productive and more expensive. New technology may or may not displace them."]
-      [:li
-       "Many developed countries will have to go through major economic restructurings to pay off their debts. The now-common combination of a democratic, capitalist country with a cradle-to-grave welfare state may be an outlier in 50 years time."]
-      [:li
-       "Entertainment will become more addictive, and so will food. (Just consider how many people are currently employed to make sure this happens.)"]
-      [:li "Online education will skyrocket. This is 100% going to happen."]
-      [:li
-       "As people get richer, the number of high-quality artisan products will go through the roof. As the barrier to entry for new businesses drops, the number of freelancers will continue to climb."]
-      [:li
-       "Warren Buffett will die. 99% of his wealth will go to charity as promised, and millions of lives will be touched."]]
-     [:p
-      "The good thing is, none of these things scare me too much. A lot of them are pretty exciting to consider."]
-     [:p
-      "But the most interesting parts of the future lie where I can’t see. When making predictions about the future, the unknown is often more important than the known."]
-     [:p "Here are some things that " [:strong "might "]
-      "happen in my lifetime:"]
-     [:ul
-      [:li
-       "We could develop superintelligent AI that makes us so productive that most of us don’t need to work anymore. On the other hand, it could kill a lot of us too."]
-      [:li
-       "We could develop the ability to harvest the power of fusion energy. On the other hand, we could have a nuclear war."]
-      [:li
-       "We could find a cure for HIV. Malaria might be a forgotten disease. Cancer, diabetes, and Alzheimer’s might be too."]
-      [:li
-       "We could have a worldwide epidemic on a scale the human race has never seen. This one scares the hell out of Bill Gates, so I’m willing to listen."]
-      [:li
-       "Automation could lead to a huge abundance of resources for all. On the other hand, automation could create an unprecedented amount of poverty for the unskilled."]
-      [:li
-       "We might get really good at using CRISPR, and start editing our children’s DNA. If this happens, expect a lot of family feuds."]
-      [:li
-       "We might all stop eating animal meat and switch to plant-based meat. This would be like a second agricultural revolution. It would also free up enormous quantities of land for reforestation."]
-      [:li
-       "Nanotechnology might completely disrupt the manufacturing industry and lead to a world of radical abundance. Read Eric Drexler’s "
-       [:a {:href "http://metamodern.com/about-the-author/"} "stuff"]
-       ". It’s huge."]
-      [:li
-       "Growth may continue to be slow throughout the Western World. This would be extremely troubling for our political institutions. I would not expect the U.S. or European systems of government to last 40 years under the current economic strain."]
-      [:li
-       "We could have a climatic catastrophe, and millions of people might starve to death."]
-      [:li
-       "We could establish a small colony on mars. Wouldn’t that be wicked?"]
-      [:li
-       "My children might have vastly better educational opportunities outside of University."]
-      [:li
-       "We could solve a lot of the problems related to ageing, and a decent amount of us might live to 150 or so. The resulting demographic shift could have a bigger economic impact than any of the above."]]
-     [:p "That doesn’t sound like a very positive future to you?"]
-     [:p
-      "Well, that is partially true. Whatever changes you see in the future, you can be assured some of them will have very negative consequences. This has always been true."]
-     [:p
-      "But the above possibilities for the next 40, 50, 60 years is bloody interesting from the passive observer’s point of view. If you thought the Bachelor NZ was the best reality T.V. show ever, just wait until you watch the documentaries of 2100."]
-     [:p
-      "If the shit really hits the fan, I can always walk into the bush and join the "
-      [:a {:href "https://www.youtube.com/watch?v=3C79_YGvCLQ"} "Wilderpeople"]
-      ". Hopefully they’ll still have Wi-Fi so I can read this blog post."]),
-  :date "2017-02-22",
-  :link-path "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x227ce711
-               "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"],
-  :title "Turning 20 In The Age Of Uncertainty"}
- {:body
-    ([:h1 "Objects in Clojure"]
-     [:p
-      "Objects are functions. Every functional programming language can implement them, even if they're not supported at the language level."]
-     [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
-     [:p "Here's the Python implementation:"]
-     [:pre
-      [:code {:class "Python"}
-       "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
-     [:p]
-     [:p "And here's how we use it:"]
-     [:pre
-      [:code
-       "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
-     [:p "Straight-forward stuff. Now, how about Clojure?"]
-     [:pre
-      [:code {:class "Clojure"}
-       "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
-     [:p
-      "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
-     [:pre
-      [:code {:class "Clojure"}
-       "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
-     [:p]
-     [:p "Notice the similarity?"]
-     [:p
-      "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
-     [:pre
-      [:code {:class "Clojure"}
-       "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
-     [:p "There's no built-in " [:code "class"]
-      " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
-      [:code "class"]
-      " symbol as syntactic sugar. Semantically, it creates a function. Of course there's more the "
-      [:code "class"]
-      " can do, like inheritance. We could implement with functions too, but that's for another post! "]),
-  :date "2022-01-28",
-  :link-path "posts/2022-01-28-objects-in-clojure.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x190ed8fe
-               "posts/2022-01-28-objects-in-clojure.md"],
-  :title "Objects In Clojure"}
- {:body
-    ([:h1 "Subtyping and inheritance"]
-     [:p
-      "Inheritance allows objects to re-use a subset of its superclasses' methods."]
-     [:p
-      "Subtyping allows objects to be substituted for one another. A type is a subtype if it implements all the operations of the supertype."]
-     [:p "Let's see an example."]
-     [:p "Deque supports 4 operations:"]
-     [:ul [:li "insert-front"] [:li "drop-front"] [:li "insert-rear"]
-      [:li "drop-rear"]]
-     [:p "Stack can inherit from Deque:"]
-     [:ul [:li "Deque.insert-front -&gt; push"]
-      [:li "Deque.drop-front -&gt; pop"]]
-     [:p "Queue can inherit from Deque:"]
-     [:ul [:li "Deque.insert-front -&gt; insert"]
-      [:li "Deque.drop-rear -&gt; delete"]]
-     [:p "Stack and Queue inherit behaviour from Deque."]
-     [:p
-      "But Stack and Queue are not subtypes, because they do not reimplement everything from Deque. Only a subset."]
-     [:p
-      "Deque would actually be a subtype of Stack and Queue if the methods were not renamed."]),
-  :date "2022-01-28",
-  :link-path "posts/2022-01-28-subtyping-and-inheritance.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x12f60108
-               "posts/2022-01-28-subtyping-and-inheritance.md"],
-  :title "Subtyping And Inheritance"})
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:date "2017-02-17", :title "Dont Get Bored"}
- {:date "2017-02-22", :title "Turning 20 In The Age Of Uncertainty"}
- {:date "2022-01-28", :title "Objects In Clojure"}
- {:date "2022-01-28", :title "Subtyping And Inheritance"})
-clj꞉index꞉> 
-; clojure.lang.ExceptionInfo: java.lang.String cannot be cast to java.lang.Number
-clj꞉index꞉> 
-({:body
-    ([:h1 "Dont get bored"]
-     [:p "That's a heuristic I like the sound of."]
-     [:p
-      "Today was the end of a major chapter in my life: my first job working for a tech start-up."]
-     [:p
-      "As I look for my next adventure, I’ve realised I have more opportunities than ever before to craft the lifestyle that I want. But with great opportunities comes greater potential to miss them."]
-     [:p
-      "As we parted after Friday drinks, my now former boss gave me some advice I don’t want to forget. “"
-      [:em "Whatever you do, don’t let yourself get bored.”"]]
-     [:p
-      "Wow, I thought. I’ve never thought of avoiding boredom as a heuristic for decision making. Yet here’s evidence of a man who’s lived his life doing things that interest him, and it’s got him somewhere. I doubt that many people achieve that."]
-     [:p
-      "The important thing to note is that he is making a negative claim about what you "
-      [:em "should not "] "do, instead of a positive claim about what you "
-      [:em "should "]
-      "do. The above statement is very different from saying, “Whatever you do, do what interests you most”. I can still pursue things like success, money and social influence if I feel like that’s important, but it cannot come at the expense of being getting bored with life."]
-     [:p
-      "When you think about it, what would you trade for a life of boredom? How much would you be willing to earn for a dull life? Is it possible to be happy if you are bored?"]
-     [:p
-      "Imagine living your life not following money, not hedonism, not success, not fame or fortune, but just avoiding getting stuck in a position that loses your interest. What would that life look like?"]),
-  :date "2017-02-17",
-  :link-path "posts/2017-02-17-dont-get-bored.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x3c558116
-               "posts/2017-02-17-dont-get-bored.md"],
-  :title "Dont Get Bored"}
- {:body
-    ([:h1 "Turning 20 in the age of uncertainty"]
-     [:p "I’m excited. You know why?"]
-     [:p
-      "Tomorrow, I’m turning 20 in a world when the future has never been more interesting."]
-     [:p
-      "First of all, the number of options open to a 20 year old like me is staggeringly high compared to my parents."]
-     [:p
-      "Second of all, these options are only going to increase. In the day I turn 20, 650,000 people will gain access to the internet for the first time. That makes almost 4.5 billion internet users worldwide. A great number of these people will create new markets, new companies, new industries, new career pathways, new product categories, and new technological breakthroughs that will no doubt have an impact on my life."]
-     [:p
-      "Considering the current state of the world, you might be tempted to call the era we live in the Age of the Internet. But I think that’s missing the point. The biggest impact of the internet on the world so far has been rapid, consistent, and unpredictable disruption. More accurately, we are living in the "
-      [:em "Age of Uncertainty."]]
-     [:p
-      "These days, the only thing you can predict about the world is that the future will be very different."]
-     [:p
-      "So, to celebrate my 20th Birthday, I’ve decided to make this post into a bunch of predictions about the future of the world and myself. Think of it like a reverse time-capsule!"]
-     [:p
-      "Here are a few big things I can be pretty certain will happen in my working lifetime:"]
-     [:ul
-      [:li "The economic landscape of the world is going to be " [:em "very "]
-       "different. By the time I turn 60, India’s GPD might be larger than that of the United States. China’s might be double."]
-      [:li
-       "The U.S. will no longer have a monopoly on the world’s most innovative companies. Chinese tech giants like Baidu and Tencent are already hinting at a new future of technology in the East."]
-      [:li
-       "There will be a huge shift in political power. The political landscape has stayed relatively stable since the Cold War era, but that is likely to change as developing countries grow wealthier."]
-      [:li
-       "Muslims will outnumber Christians, and Atheists will be less as a percentage of the population than today."]
-      [:li "There will be waaaaay more vegans. It’s " [:strong "not"]
-       " just a fad, guys."]
-      [:li
-       "Advancements in artificial intelligence will keep being developed. Given the recent upsurge in popularity of AI courses at Universities like Stanford and Harvard, we can expect some real breakthroughs in the next 10 years. Whether or not you believe a superintelligent AI is possible, there is no doubt that many cognitive tasks will continue to be automated at an accelerating pace."]
-      [:li
-       "I won’t have to drive to work, and I won’t need to own a car. Self-driving cars "
-       [:em "will "] "work, and it " [:em "will "]
-       "be cheaper to not own one. This is pretty huge for our cities. 14 percent of Los Angeles is devoted to car storage at the moment."]
-      [:li
-       "South East Asia will be a lot more expensive to travel to. Rapidly rising incomes and fast improving political institutions mean that $2 per night accommodation won’t stick around for long. Ever more reason to go there when I’m 20!"]
-      [:li
-       "The health-care and education system will continue to get less productive and more expensive. New technology may or may not displace them."]
-      [:li
-       "Many developed countries will have to go through major economic restructurings to pay off their debts. The now-common combination of a democratic, capitalist country with a cradle-to-grave welfare state may be an outlier in 50 years time."]
-      [:li
-       "Entertainment will become more addictive, and so will food. (Just consider how many people are currently employed to make sure this happens.)"]
-      [:li "Online education will skyrocket. This is 100% going to happen."]
-      [:li
-       "As people get richer, the number of high-quality artisan products will go through the roof. As the barrier to entry for new businesses drops, the number of freelancers will continue to climb."]
-      [:li
-       "Warren Buffett will die. 99% of his wealth will go to charity as promised, and millions of lives will be touched."]]
-     [:p
-      "The good thing is, none of these things scare me too much. A lot of them are pretty exciting to consider."]
-     [:p
-      "But the most interesting parts of the future lie where I can’t see. When making predictions about the future, the unknown is often more important than the known."]
-     [:p "Here are some things that " [:strong "might "]
-      "happen in my lifetime:"]
-     [:ul
-      [:li
-       "We could develop superintelligent AI that makes us so productive that most of us don’t need to work anymore. On the other hand, it could kill a lot of us too."]
-      [:li
-       "We could develop the ability to harvest the power of fusion energy. On the other hand, we could have a nuclear war."]
-      [:li
-       "We could find a cure for HIV. Malaria might be a forgotten disease. Cancer, diabetes, and Alzheimer’s might be too."]
-      [:li
-       "We could have a worldwide epidemic on a scale the human race has never seen. This one scares the hell out of Bill Gates, so I’m willing to listen."]
-      [:li
-       "Automation could lead to a huge abundance of resources for all. On the other hand, automation could create an unprecedented amount of poverty for the unskilled."]
-      [:li
-       "We might get really good at using CRISPR, and start editing our children’s DNA. If this happens, expect a lot of family feuds."]
-      [:li
-       "We might all stop eating animal meat and switch to plant-based meat. This would be like a second agricultural revolution. It would also free up enormous quantities of land for reforestation."]
-      [:li
-       "Nanotechnology might completely disrupt the manufacturing industry and lead to a world of radical abundance. Read Eric Drexler’s "
-       [:a {:href "http://metamodern.com/about-the-author/"} "stuff"]
-       ". It’s huge."]
-      [:li
-       "Growth may continue to be slow throughout the Western World. This would be extremely troubling for our political institutions. I would not expect the U.S. or European systems of government to last 40 years under the current economic strain."]
-      [:li
-       "We could have a climatic catastrophe, and millions of people might starve to death."]
-      [:li
-       "We could establish a small colony on mars. Wouldn’t that be wicked?"]
-      [:li
-       "My children might have vastly better educational opportunities outside of University."]
-      [:li
-       "We could solve a lot of the problems related to ageing, and a decent amount of us might live to 150 or so. The resulting demographic shift could have a bigger economic impact than any of the above."]]
-     [:p "That doesn’t sound like a very positive future to you?"]
-     [:p
-      "Well, that is partially true. Whatever changes you see in the future, you can be assured some of them will have very negative consequences. This has always been true."]
-     [:p
-      "But the above possibilities for the next 40, 50, 60 years is bloody interesting from the passive observer’s point of view. If you thought the Bachelor NZ was the best reality T.V. show ever, just wait until you watch the documentaries of 2100."]
-     [:p
-      "If the shit really hits the fan, I can always walk into the bush and join the "
-      [:a {:href "https://www.youtube.com/watch?v=3C79_YGvCLQ"} "Wilderpeople"]
-      ". Hopefully they’ll still have Wi-Fi so I can read this blog post."]),
-  :date "2017-02-22",
-  :link-path "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x59d7c72f
-               "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"],
-  :title "Turning 20 In The Age Of Uncertainty"}
- {:body
-    ([:h1 "Objects in Clojure"]
-     [:p
-      "Objects are functions. Every functional programming language can implement them, even if they're not supported at the language level."]
-     [:p "To demonstrate, let's compare stack objects in Python and Clojure."]
-     [:p "Here's the Python implementation:"]
-     [:pre
-      [:code {:class "Python"}
-       "class Stack:\n  def __init__(self):\n    self.elements = []\n\n  def push(self, data):\n    self.elements = [data] + self.elements\n\n  def pop(self):\n    if len(self.elements):\n      result = self.elements[0]\n      self.elements = self.elements[1:]\n      return result\n    else:\n      return None\n\nstack = Stack()\nstack.push(1)\nstack.push(2)\nprint(stack.elements)\n"]]
-     [:p]
-     [:p "And here's how we use it:"]
-     [:pre
-      [:code
-       "stack = Stack()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nstack.pop()\n=&gt; 3\nstack.elements \n=&gt; [2, 1]\n"]]
-     [:p "Straight-forward stuff. Now, how about Clojure?"]
-     [:pre
-      [:code {:class "Clojure"}
-       "(defn new-stack []\n  (let [elements (atom [])]\n    (fn [method]\n      (case method\n        :push     (fn [x]\n                    (swap! elements #(cons x %))\n                    nil)\n        :pop      (fn []\n                    (let [result (first @elements)]\n                      (swap! elements rest)\n                      result))\n        :elements (fn [] @elements)))))\n"]]
-     [:p
-      "It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:"]
-     [:pre
-      [:code {:class "Clojure"}
-       "(def stack (new-stack))\n((stack :push) 1)\n((stack :push) 2)\n((stack :push) 3)\n((stack :pop))\n=&gt; 3\n((stack :elements))\n=&gt; (2 1)\n"]]
-     [:p]
-     [:p "Notice the similarity?"]
-     [:p
-      "The Clojure &quot;class&quot; is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state."]
-     [:pre
-      [:code {:class "Clojure"}
-       "object  method-name\n   |       |\n   |       |\n   .       .\n((stack :push) 3)\n  ...........  .\n       |       |\n       |       |\n       |       |\n       |       |\n    method   method-argument\n"]]
-     [:p "There's no built-in " [:code "class"]
-      " symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's "
-      [:code "class"]
-      " symbol as syntactic sugar. Semantically, it creates a function. Of course there's more the "
-      [:code "class"]
-      " can do, like inheritance. We could implement with functions too, but that's for another post! "]),
-  :date "2022-01-28",
-  :link-path "posts/2022-01-28-objects-in-clojure.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x45be039b
-               "posts/2022-01-28-objects-in-clojure.md"],
-  :title "Objects In Clojure"}
- {:body
-    ([:h1 "Subtyping and inheritance"]
-     [:p
-      "Inheritance allows objects to re-use a subset of its superclasses' methods."]
-     [:p
-      "Subtyping allows objects to be substituted for one another. A type is a subtype if it implements all the operations of the supertype."]
-     [:p "Let's see an example."]
-     [:p "Deque supports 4 operations:"]
-     [:ul [:li "insert-front"] [:li "drop-front"] [:li "insert-rear"]
-      [:li "drop-rear"]]
-     [:p "Stack can inherit from Deque:"]
-     [:ul [:li "Deque.insert-front -&gt; push"]
-      [:li "Deque.drop-front -&gt; pop"]]
-     [:p "Queue can inherit from Deque:"]
-     [:ul [:li "Deque.insert-front -&gt; insert"]
-      [:li "Deque.drop-rear -&gt; delete"]]
-     [:p "Stack and Queue inherit behaviour from Deque."]
-     [:p
-      "But Stack and Queue are not subtypes, because they do not reimplement everything from Deque. Only a subset."]
-     [:p
-      "Deque would actually be a subtype of Stack and Queue if the methods were not renamed."]),
-  :date "2022-01-28",
-  :link-path "posts/2022-01-28-subtyping-and-inheritance.html",
-  :post-path #object
-              [sun.nio.fs.UnixPath 0x7d08ea6a
-               "posts/2022-01-28-subtyping-and-inheritance.md"],
-  :title "Subtyping And Inheritance"})
-clj꞉index꞉> 
-; clojure.lang.ExceptionInfo: java.lang.String cannot be cast to java.lang.Number
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-; clojure.lang.ExceptionInfo: java.lang.String cannot be cast to java.lang.Number
-clj꞉index꞉> 
-#'index/posts
-clj꞉index꞉> 
-({:date "2022-01-28", :title "Objects In Clojure"}
- {:date "2022-01-28", :title "Subtyping And Inheritance"}
- {:date "2017-02-22", :title "Turning 20 In The Age Of Uncertainty"}
- {:date "2017-02-17", :title "Dont Get Bored"})
 clj꞉index꞉> 

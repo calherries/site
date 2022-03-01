@@ -1,0 +1,20 @@
+[{:date     "2022-01-28"
+  :source   "posts/2022-01-28-objects-in-clojure.md"
+  :title    "Objects in Clojure"
+  :path     "posts/objects-in-clojure.html"
+  :template :post}
+ {:date     "2017-02-22"
+  :source   "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
+  :title    "Turning 20 in the Age of Uncertainty"
+  :path     "posts/turning-20-in-the-age-of-uncertainty.html"
+  :template :post}
+ {:date     "2017-02-17"
+  :source   "posts/2017-02-17-dont-get-bored.md"
+  :title    "Dont get Bored"
+  :path     "posts/dont-get-bored.html"
+  :template :post}
+ {:date     "2022-01-28"
+  :source   "posts/2022-01-28-subtyping-and-inheritance.md"
+  :title    "Subtyping and Inheritance"
+  :path     "posts/subtyping-and-inheritance.html"
+  :template :post}]

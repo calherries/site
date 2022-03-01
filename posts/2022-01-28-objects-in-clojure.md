@@ -1,6 +1,6 @@
 # Objects in Clojure
 
-Objects are functions. Every functional programming language can implement them, even if they're not supported at the language level.
+While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level.
 
 To demonstrate, let's compare stack objects in Python and Clojure.
 
@@ -82,4 +82,4 @@ object  method-name
     method   method-argument
 ```
 
-There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's `class` symbol as syntactic sugar. Semantically, it creates a function. The `class` symbol enables more than just object creation though. Inheritance and subtyping are two examples. But we could simulate these features in Clojure using dynamic dispatch. But that's for another post! 
+There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's `class` symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics 

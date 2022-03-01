@@ -1,0 +1,1 @@
+["^ ","~$greet",["^ ","~:row",4,"~:col",1,"~:fixed-arities",["~#set",[1]],"~:name","^0","~:ns","~$testnew.testnew","~:top-ns","^7"],"~$-main",["^ ","^1",9,"^2",1,"~:varargs-min-arity",0,"^5","^9","^6","^7","^8","^7"],"~:filename","/Users/callumherries/code/clj/play/testnew/src/testnew/testnew.clj"]

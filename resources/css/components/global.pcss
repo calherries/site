@@ -1,3 +1,9 @@
+:root {
+	--font-primary: 'Inter', sans-serif;
+	--font-size-default: 16px;
+	--font-size-header: 32px;
+}
+
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
@@ -5,10 +11,13 @@
   body {
     @apply flex;
     @apply flex-col;
-    font-family: 'Crimson Pro', serif;
-    font-size: 20px;
+    font-weight: 400;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-default);
+    letter-spacing: -0.5px;
+    line-height: 1.6;
     @apply max-w-screen-md;
-    @apply text-gray-800;
+    @apply text-gray-700;
   }
   h1 {
     font-family: 'cooper-black-std', serif;
