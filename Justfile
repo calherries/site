@@ -30,7 +30,7 @@ sync:
   browser-sync start --server --files "**/*.html" "**/*.css"
 
 deploy:
-  just build-css-prod
+  just build-assets
   git add -A
   git commit -m "Deployment"
   git push

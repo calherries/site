@@ -1,10 +1,10 @@
-# Objects in Clojure
+# Objects as functions in Clojure
 
-While we often talk about objects as concrete features of a language. But an object is really an abstract idea, and can be implemented with functions. Every functional programming language can implement them, even if they're not officially supported at the language level.
+We often talk about objects as concrete features of a language. For example, a JavaScript object. But objects are also an abstract idea, that can be implemented without using language features specific to objects. In fact, objects can be implemented using function closures. Every functional programming language can implement them, even if they're not officially supported at the language level.
 
 To demonstrate, let's compare stack objects in Python and Clojure.
 
-Here's the Python implementation:
+Here's the Python implementation of a stack object using the `class` keyword:
 ```Python
 class Stack:
   def __init__(self):
