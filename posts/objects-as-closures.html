@@ -1,0 +1,59 @@
+<html><head><meta charset="UTF-8"><meta content="My personal site." name="description"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="../resources/public/css/app-components.css" rel="stylesheet"><link href="../resources/public/css/app-utilities.css" rel="stylesheet"><link href="../resources/public/css/github.css" rel="stylesheet"><link href="https://use.typekit.net/kxb8fhj.css" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Crimson+Pro" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/clojure.min.js"></script><script>hljs.highlightAll()</script></head><body class="p-8"><div class="flex gap-5 mb-4"><h2 class="font-bold"><a href="/" style="color:#6679CC;border-color:#6679CC;">Home</a></h2></div><div class="my-3"><h1>Objects as Closures</h1><p>We often talk about objects as concrete features of a language. For example, a JavaScript object. But objects are also an abstract idea, that can be implemented without using language features specific to objects. In fact, objects can be implemented by just using functions. Every programming language with first class functions can implement objects, even if objects are not officially supported at the language level.</p><p>To demonstrate, let's compare stack objects in Python and Clojure.</p><p>Here's the Python implementation of a stack object using the <code>class</code> keyword:</p><pre><code class="Python">class Stack:
+  def __init__(self):
+    self.elements = []
+
+  def push(self, data):
+    self.elements = [data] + self.elements
+
+  def pop(self):
+    if len(self.elements):
+      result = self.elements[0]
+      self.elements = self.elements[1:]
+      return result
+    else:
+      return None
+
+stack = Stack()
+stack.push(1)
+stack.push(2)
+print(stack.elements)
+</code></pre><p></p><p>And here's how we use it:</p><pre><code>stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+stack.pop()
+=&gt; 3
+stack.elements 
+=&gt; [2, 1]
+</code></pre><p>Straight-forward stuff. Now, how about Clojure?</p><pre><code class="Clojure">(defn new-stack []
+  (let [elements (atom [])]
+    (fn [method]
+      (case method
+        :push     (fn [x]
+                    (swap! elements #(cons x %))
+                    nil)
+        :pop      (fn []
+                    (let [result (first @elements)]
+                      (swap! elements rest)
+                      result))
+        :elements (fn [] @elements)))))
+</code></pre><p>It's a bit noisier than the Python version, but it works in a similar way. Here's how you use it:</p><pre><code class="Clojure">(def stack (new-stack))
+((stack :push) 1)
+((stack :push) 2)
+((stack :push) 3)
+((stack :pop))
+=&gt; 3
+((stack :elements))
+=&gt; (2 1)
+</code></pre><p></p><p>Notice the similarity?</p><p>The new-stack &quot;class&quot; in Clojure is just a function that returns a function with access to the state. The returned function is called a closure because the function's open variables (in this case <code>elements</code>) have been closed by the surrounding environment. </p><p>That function closure is an object! It has it's own state, and has a set of methods that operate on that state. You can get a method from the object by calling the object function with the method name. Once you've got the method, you can call it like a normal function. The difference between a method and a typical function is that the method has privileged access to the object's hidden internal state.</p><pre><code class="Clojure">object  method-name
+   |       |
+   |       |
+   .       .
+((stack :push) 3)
+  ...........  .
+       |       |
+       |       |
+       |       |
+       |       |
+    method   method-argument
+</code></pre><p>There's no built-in <code>class</code> symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's <code>class</code> symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics </p></div></body></html>

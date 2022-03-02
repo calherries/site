@@ -66,7 +66,9 @@ It's a bit noisier than the Python version, but it works in a similar way. Here'
 ```
 Notice the similarity?
 
-The Clojure "class" is just a function that returns a function. That returned function is an object! It has it's own state, and has a set of methods that operate on that state. You can get a method from the object by calling the object function with the method name. Once you've got the method, you can call it like a normal function. The difference between a method and a typical function is that the method has privileged access to the object's hidden internal state.
+The new-stack "class" in Clojure is just a function that returns a function with access to the state. The returned function is called a closure because the function's open variables (in this case `elements`) have been closed by the surrounding environment. 
+
+That function closure is an object! It has it's own state, and has a set of methods that operate on that state. You can get a method from the object by calling the object function with the method name. Once you've got the method, you can call it like a normal function. The difference between a method and a typical function is that the method has privileged access to the object's hidden internal state.
 
 ```Clojure
 object  method-name
