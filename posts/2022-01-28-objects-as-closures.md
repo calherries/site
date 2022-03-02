@@ -1,6 +1,6 @@
-# Objects as functions in Clojure
+# Objects as Closures
 
-We often talk about objects as concrete features of a language. For example, a JavaScript object. But objects are also an abstract idea, that can be implemented without using language features specific to objects. In fact, objects can be implemented using function closures. Every functional programming language can implement them, even if they're not officially supported at the language level.
+We often talk about objects as concrete features of a language. For example, a JavaScript object. But objects are also an abstract idea, that can be implemented without using language features specific to objects. In fact, objects can be implemented by just using functions. Every programming language with first class functions can implement objects, even if objects are not officially supported at the language level.
 
 To demonstrate, let's compare stack objects in Python and Clojure.
 
@@ -66,7 +66,7 @@ It's a bit noisier than the Python version, but it works in a similar way. Here'
 ```
 Notice the similarity?
 
-The Clojure "class" is just a function that returns a function. That returned function is an object! It has it's own internal state, and has a set of methods that operate on that state. You can get a method by calling the object function with the method name. Once you've got the method from the object, you can call it like a normal function. The difference between a method and a typical function is that the method has access to the object's internal state.
+The Clojure "class" is just a function that returns a function. That returned function is an object! It has it's own state, and has a set of methods that operate on that state. You can get a method from the object by calling the object function with the method name. Once you've got the method, you can call it like a normal function. The difference between a method and a typical function is that the method has privileged access to the object's hidden internal state.
 
 ```Clojure
 object  method-name
