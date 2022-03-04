@@ -1,6 +1,6 @@
 # Objects as Closures
 
-We often talk about objects as concrete features of a language. For example, a JavaScript object. But objects are also an abstract idea, that can be implemented without using language features specific to objects. In fact, objects can be implemented by just using functions. Every programming language with first class functions can implement objects, even if objects are not officially supported at the language level.
+We engineers often talk about objects as concrete features of a language. For example, a JavaScript object, or a Python object. But objects are an abstract idea that can be implemented without using language features specific to objects. In fact, every programming language with first class functions and lexical scoping can implement objects, even if objects are not officially supported at the language level.
 
 To demonstrate, let's compare stack objects in Python and Clojure.
 
@@ -84,4 +84,4 @@ object  method-name
     method   method-argument
 ```
 
-There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! You can think of Python's `class` symbol as syntactic sugar. Semantically, it creates a function. Python classes can do more than just define objects, like enable inheritance and subtyping. But the basics 
+There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! At the level of the object abstraction, the Python class and the Clojure function achieve the same goal. Python classes can do more than just define objects, like enable inheritance. Inheritance is an added feature to objects, and wasn't included in Alan Kay's original vision for OOP.

@@ -1,5 +1,7 @@
 # Subtyping and inheritance
 
+Subtyping and inheritance are two similar, but subtly different concepts.
+
 Inheritance allows objects to re-use a subset of its superclasses' methods.
 
 Subtyping allows objects to be substituted for one another. A type is a subtype if it implements all the operations of the supertype.
