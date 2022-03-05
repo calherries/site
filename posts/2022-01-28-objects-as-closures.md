@@ -1,6 +1,6 @@
 # Objects as Closures
 
-We engineers often talk about objects as concrete features of a language. For example, a JavaScript object, or a Python object. But objects are an abstract idea that can be implemented without using language features specific to objects. In fact, every programming language with first class functions and lexical scoping can implement objects, even if objects are not officially supported at the language level.
+We engineers often talk about objects as concrete features of a language. For example, a JavaScript object, or a Python object. But objects are an abstract idea that can be implemented without using specific language features. In fact, every programming language with first class functions and lexical scoping can implement objects, even if objects are not officially supported at the language level.
 
 To demonstrate, let's compare stack objects in Python and Clojure.
 
