@@ -20,7 +20,7 @@
   :template :post}
  {:date     "2022-03-08"
   :source   "posts/2022-03-08-predicate-set-duality.md"
-  :title    "Predicate-set duality theory"
+  :title    "Predicate-Set Duality"
   :path     "posts/predicate-set-duality.html"
   :template :post}
  ]

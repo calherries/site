@@ -1,4 +1,4 @@
-# Predicate-set duality theory
+# Predicate-Set Duality
 
 The wave-particle duality theory of light states that light waves can show particle-like properties while particles can show wave-like properties. Light is neither just a wave nor a particle. It can be both, depending on how you view it.
 
