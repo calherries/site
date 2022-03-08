@@ -17,4 +17,10 @@
   :source   "posts/2022-01-28-subtyping-and-inheritance.md"
   :title    "Subtyping and Inheritance"
   :path     "posts/subtyping-and-inheritance.html"
-  :template :post}]
+  :template :post}
+ {:date     "2022-03-08"
+  :source   "posts/2022-03-08-predicate-set-duality.md"
+  :title    "Predicate-set duality theory"
+  :path     "posts/predicate-set-duality.html"
+  :template :post}
+ ]
