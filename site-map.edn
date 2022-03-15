@@ -24,8 +24,8 @@
   :path     "posts/predicate-set-duality.html"
   :template :post}
  {:date     "2022-03-15"
-  :source   "posts/2022-03-15-im-an-engineer.md"
-  :title    "I'm an engineer not a craftsman"
-  :path     "posts/im-an-engineer.html"
+  :source   "posts/2022-03-15-more-engineering-less-craftsmanship.md"
+  :title    "More engineering, less craftsmanship"
+  :path     "posts/more-engineering-less-craftsmanship.html"
   :template :post}
  ]
