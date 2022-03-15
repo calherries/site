@@ -23,4 +23,9 @@
   :title    "Predicate-Set Duality"
   :path     "posts/predicate-set-duality.html"
   :template :post}
+ {:date     "2022-03-15"
+  :source   "posts/2022-03-15-im-an-engineer.md"
+  :title    "I'm an engineer not a craftsman"
+  :path     "posts/im-an-engineer.html"
+  :template :post}
  ]

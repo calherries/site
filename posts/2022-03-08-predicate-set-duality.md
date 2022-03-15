@@ -2,7 +2,7 @@
 
 The wave-particle duality theory of light states that light waves can show particle-like properties while particles can show wave-like properties. Light is neither just a wave nor a particle. It can be both, depending on how you view it.
 
-In set-theory as in programming, sets aren't literally the same thing as predicates. But there is what I call the predicate-set duality theory: sets show predicate-like properties and predicates show set-like properties. Realising this can bring tremendous clarity to the programs you write.
+In set-theory as in programming, sets aren't literally the same thing as predicates. But there is what I call the predicate-set duality theory: sets show predicate-like properties and predicates show set-like properties. Recognizing this can bring clarity to the programs you write.
 
 To demonstrate, imagine we're classifying animals by the number of legs they have. One way to do it is with sets:
 
@@ -37,7 +37,7 @@ This is even more true in the Clojure programming language, where sets can be ca
 (def three-legged? #{})
 (def two-legged? #{"human" "bird"})
 ```
-And simply called them as functions:
+You can call the sets as functions:
 ```clojure
 (four-legged? "sheep")
 => true
