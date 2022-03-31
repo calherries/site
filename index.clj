@@ -63,7 +63,7 @@
      [:b "Some things you can click on:"]
      [:ul
       [:li [:a {:href "https://github.com/calherries"} "Github"] ", a place where I solve some problems and create others"]
-      [:li [:a {:href "https://github.com/calherries/graft"} "Twitter"] ", a place for random bursts of coherence"]]]
+      [:li [:a {:href "https://twitter.com/calherries"} "Twitter"] ", a place for random bursts of coherence"]]]
     [:div {:class "mt-5"}
      [:b "Some thoughts on programming:"]
      [:ul
