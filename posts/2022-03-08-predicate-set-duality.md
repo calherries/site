@@ -76,6 +76,6 @@ We can package the `four-legged?` predicate with the data:
 
 Either way, the effect is the same. We can determine that the animal is four-legged or not.
 
-We now have three ways of representing the "four-leggedness" property of an animal: as a set, as a predicate function, or a key on the data itself. Each way has its benefits and downsides, but each are equivalent as far as the "four-leggedness" abstraction is concerned. In general, if you have a property you wish to designate on an object or piece of data, you know you have three ways to do it.
+We now have three ways of representing the "four-leggedness" property of an animal: as a set, as a predicate function, or a key on the data itself. Each way has its benefits and downsides, but each are equivalent as far as the "four-leggedness" abstraction is concerned. In general, if you have a property you wish to designate on an object or piece of data, you have these three ways to do it.
 
-Through this lens, whether you define a property as a set, predicate, or a key on a map is now an implementation detail, that you can choose to hide if you wish. The abstraction of the property is actually what matters.
+Through this lens, whether you define a property as a set, predicate, or a key on a map is now an implementation detail. If you want to, you could hide that choice from other parts of the code, so they don't know *how* it works. Only the abstraction matters when you reason about *why* the program works.
