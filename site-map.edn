@@ -1,31 +1,37 @@
 [{:date     "2022-01-28"
   :source   "posts/2022-01-28-objects-as-closures.md"
   :title    "Objects as Closures"
+  :section  "Programming"
   :path     "posts/objects-as-closures.html"
   :template :post}
  {:date     "2017-02-22"
   :source   "posts/2017-02-22-turning-20-in-the-age-of-uncertainty.md"
   :title    "Turning 20 in the Age of Uncertainty"
+  :section  "General"
   :path     "posts/turning-20-in-the-age-of-uncertainty.html"
   :template :post}
  {:date     "2017-02-17"
   :source   "posts/2017-02-17-dont-get-bored.md"
   :title    "Dont get Bored"
+  :section  "General"
   :path     "posts/dont-get-bored.html"
   :template :post}
  {:date     "2022-01-28"
   :source   "posts/2022-01-28-subtyping-and-inheritance.md"
   :title    "Subtyping and Inheritance"
+  :section  "Programming"
   :path     "posts/subtyping-and-inheritance.html"
   :template :post}
  {:date     "2022-03-08"
   :source   "posts/2022-03-08-predicate-set-duality.md"
   :title    "Predicate-Set Duality"
+  :section  "Programming"
   :path     "posts/predicate-set-duality.html"
   :template :post}
- {:date     "2022-03-15"
+ #_{:date     "2022-03-15"
   :source   "posts/2022-03-15-more-engineering-less-craftsmanship.md"
   :title    "More engineering, less craftsmanship"
   :path     "posts/more-engineering-less-craftsmanship.html"
+  :section  "General"
   :template :post}
  ]

@@ -1,16 +1,33 @@
-<html><head><meta charset="UTF-8"><meta content="My personal site." name="description"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="../resources/public/css/app-components.css" rel="stylesheet"><link href="../resources/public/css/app-utilities.css" rel="stylesheet"><link href="../resources/public/css/github.css" rel="stylesheet"><link href="https://use.typekit.net/kxb8fhj.css" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Crimson+Pro" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/clojure.min.js"></script><script>hljs.highlightAll()</script></head><body class="p-8"><div class="flex gap-5 mb-4"><h2 class="font-bold"><a href="/" style="color:#6679CC;border-color:#6679CC;">Home</a></h2></div><div class="my-3"><h1>Predicate-Set Duality</h1><p>The wave-particle duality theory of light states that light waves can show particle-like properties while particles can show wave-like properties. Light is neither just a wave nor a particle. It can be both, depending on how you view it.</p><p>In set-theory as in programming, sets aren't literally the same thing as predicates. But there is what I call the predicate-set duality theory: sets show predicate-like properties and predicates show set-like properties. Recognizing this can bring clarity to the programs you write.</p><p>To demonstrate, imagine we're classifying animals by the number of legs they have. One way to do it is with sets:</p><pre><code class="clojure">(def four-legged-animals #{&quot;sheep&quot; &quot;cow&quot; &quot;pig&quot;})
+<html><head><meta charset="UTF-8"><meta content="My personal site." name="description"><meta content="width=device-width, initial-scale=1" name="viewport"><link href="../resources/public/css/app-components.css" rel="stylesheet"><link href="../resources/public/css/app-utilities.css" rel="stylesheet"><link href="../resources/public/css/github.css" rel="stylesheet"><link href="https://use.typekit.net/kxb8fhj.css" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Crimson+Pro" rel="stylesheet"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/languages/clojure.min.js"></script><script>hljs.highlightAll()</script></head><body class="p-8"><div class="flex gap-5 mb-4"><h2 class="font-bold"><a href="/" style="color:#6679CC;border-color:#6679CC;">Home</a></h2></div><div class="my-3"><h1>Predicate-Set Duality</h1><p>The wave-particle duality theory of light states that light waves show particle-like properties while particles show wave-like properties. Light is neither just a wave nor a particle. It is both, depending on how you view it.</p><p>There is an analogous phenemenon in set-theory. Sets show predicate-like properties and predicates show set-like properties. I call this predicate-set duality. Recognizing this can bring clarity to the programs you write, and open up possibilities for refactoring.</p><p>To demonstrate, imagine we're classifying animals by the number of legs they have. One way to do this is with sets:</p><pre><code class="clojure">(def four-legged-animals #{&quot;sheep&quot; &quot;cow&quot; &quot;pig&quot;})
 (def three-legged-animals #{}
 (def two-legged-animals #{&quot;human&quot; &quot;bird&quot;}
-</code></pre><p>To see whether an animal is four-legged, we can check whether it's in the four-legged-animal set:</p><pre><code class="clojure">(contains? four-legged-animals &quot;sheep&quot;)
+</code></pre><p>To see whether an animal is four-legged, you can check whether it's in the four-legged-animal set:</p><pre><code class="clojure">(contains? four-legged-animals &quot;sheep&quot;)
 =&gt; true
 </code></pre><p></p><p>But another way to achieve the same goal is to define a predicate for each set:</p><pre><code>(defn four-legged? [animal] (contains? #{&quot;sheep&quot; &quot;cow&quot; &quot;pig&quot;} animal)
 (defn three-legged? [animal] false)
 (defn two-legged? [animal] (contains? #{&quot;human&quot; &quot;bird&quot;} animal)
 </code></pre><p>To see whether an animal is four-legged, we can just call the predicate:</p><pre><code class="clojure">(four-legged? &quot;sheep&quot;)
 =&gt; true
-</code></pre><p></p><p>This is even more true in the Clojure programming language, where sets can be called as functions. We could have defined the predicates AS sets.</p><pre><code class="clojure">(def four-legged? #{&quot;sheep&quot; &quot;cow&quot; &quot;pig&quot;})
+</code></pre><p></p><p>This is even more true in the Clojure programming language, where sets can be called as if they were functions. We could have defined the predicates as sets.</p><pre><code class="clojure">(def four-legged? #{&quot;sheep&quot; &quot;cow&quot; &quot;pig&quot;})
 (def three-legged? #{})
 (def two-legged? #{&quot;human&quot; &quot;bird&quot;})
 </code></pre><p>You can call the sets as functions:</p><pre><code class="clojure">(four-legged? &quot;sheep&quot;)
 =&gt; true
-</code></pre><p></p></div></body></html>
+</code></pre><p></p><p>This reveals a fundamental duality: sets <em>are</em> predicates. Predicates <em>are</em> sets. Just not in the program, but on a more abstract, <a href="https://www.pathsensitive.com/2018/01/the-three-levels-of-software-why-code.html">logical level</a>.</p><p>We can push develop the idea further if by adding the property to the data itself.</p><p>So instead of having a predicate like this:</p><pre><code class="clojure">;; The data:
+(def animal {:type &quot;sheep&quot;
+             :name &quot;Milly&quot;})
+
+;; The predicate:
+(defn four-legged? [animal]
+  (contains? #{&quot;sheep&quot; &quot;cow&quot; &quot;pig&quot;} (:type animal))
+
+(four-legged? animal)
+=&gt; true
+</code></pre><p>We can package the <code>four-legged?</code> predicate with the data:</p><pre><code class="clojure">;; The data:
+(def animal {:type &quot;sheep&quot;
+             :name &quot;Milly&quot;
+             :legs :four-legged}) ; The predicate is packaged with the data
+
+(= (:legs animal) :four-legged)
+=&gt; true
+</code></pre><p>Either way, the effect is the same. We can determine that the animal is four-legged or not.</p><p>We now have three ways of representing the &quot;four-leggedness&quot; property of an animal: as a set, as a predicate function, or a key on the data itself. Each way has its benefits and downsides, but each are equivalent as far as the &quot;four-leggedness&quot; abstraction is concerned. In general, if you have a property you wish to designate on an object or piece of data, you know you have three ways to do it.</p><p>Through this lens, whether you define a property as a set, predicate, or a key on a map is now an implementation detail, that you can choose to hide if you wish. The abstraction of the property is actually what matters.</p><p>Predicate-set duality might seem like a trivial idea, but I can honestly say it's helped me recognise more valid transformations in the code I write, and opportunities for refactoring and simplification that I wouldn't have otherwise found.</p></div></body></html>
