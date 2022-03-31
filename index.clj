@@ -50,8 +50,8 @@
      [:b "Some things you should know about me:"]
      [:ul
       [:li "I know very little about anything (but I'm working on it)."]
-      [:li "I spend most of my time reading and writing to solve problems."]
-      [:li "But most of my problems are caused by other bits of text, usually written by me."]]]
+      [:li "I spend most of my time writing bits of text to solve problems."]
+      [:li "Most of these problems are caused by other bits of text, usually written by me."]]]
     [:div {:class "mt-5"}
      [:b "Some things I've worked on recently:"]
      [:ul
