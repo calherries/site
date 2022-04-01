@@ -45,7 +45,7 @@ You can call the sets as functions:
 
 This reveals a fundamental duality: sets *are* predicates. Predicates *are* sets. Just not in the program, but on a more abstract, [logical level](https://www.pathsensitive.com/2018/01/the-three-levels-of-software-why-code.html). They both describe a property of a data point, that can be queried separate from the data.
 
-We can develop this idea further by taking the property designated by the predicate, and adding to the data the predicate describes.
+We can develop this idea further by taking the property designated by the predicate, and adding it to the data.
 
 For example, instead of having a predicate function like this:
 

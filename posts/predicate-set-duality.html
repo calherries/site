@@ -13,7 +13,7 @@
 (def two-legged? #{&quot;human&quot; &quot;bird&quot;})
 </code></pre><p>You can call the sets as functions:</p><pre><code class="clojure">(four-legged? &quot;sheep&quot;)
 =&gt; true
-</code></pre><p></p><p>This reveals a fundamental duality: sets <em>are</em> predicates. Predicates <em>are</em> sets. Just not in the program, but on a more abstract, <a href="https://www.pathsensitive.com/2018/01/the-three-levels-of-software-why-code.html">logical level</a>. They both describe a property of a data point, that can be queried separate from the data.</p><p>We can develop this idea further by taking the property designated by the predicate, and adding to the data the predicate describes.</p><p>For example, instead of having a predicate function like this:</p><pre><code class="clojure">;; The data:
+</code></pre><p></p><p>This reveals a fundamental duality: sets <em>are</em> predicates. Predicates <em>are</em> sets. Just not in the program, but on a more abstract, <a href="https://www.pathsensitive.com/2018/01/the-three-levels-of-software-why-code.html">logical level</a>. They both describe a property of a data point, that can be queried separate from the data.</p><p>We can develop this idea further by taking the property designated by the predicate, and adding it to the data.</p><p>For example, instead of having a predicate function like this:</p><pre><code class="clojure">;; The data:
 (def animal {:type &quot;sheep&quot;
              :name &quot;Milly&quot;})
 
