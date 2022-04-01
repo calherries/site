@@ -38,7 +38,7 @@
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
     [:link {:rel "stylesheet" :href "resources/public/css/app-components.css"}]
     [:link {:rel "stylesheet" :href "resources/public/css/app-utilities.css"}]
-
+    [:link {:rel "icon" :type "image/x-icon" :href "resources/images/favicon.ico"}]
     [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css?family=Roboto+Slab:700"}]
     [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"}]
     [:link {:rel "stylesheet" :href "https://fonts.googleapis.com/css?family=Crimson+Pro"}]
@@ -90,8 +90,10 @@
   [:html
    [:head
     [:meta {:charset "UTF-8"}]
+    [:title "Cal Herries"]
     [:meta {:name "description" :content "My personal site."}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+    [:link {:rel "icon" :type "image/x-icon" :href "../resources/images/favicon.ico"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/app-components.css"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/app-utilities.css"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/github.css"}]
