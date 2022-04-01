@@ -43,22 +43,35 @@ You can call the sets as functions:
 => true
 ```
 
-This reveals a fundamental duality: sets *are* predicates. Predicates *are* sets. Just not in the program, but on a more abstract, [logical level](https://www.pathsensitive.com/2018/01/the-three-levels-of-software-why-code.html).
+This reveals a fundamental duality: sets *are* predicates. Predicates *are* sets. Just not in the program, but on a more abstract, [logical level](https://www.pathsensitive.com/2018/01/the-three-levels-of-software-why-code.html). They both describe a property of a data point, that can be queried separate from the data.
 
-We can push develop the idea further if by adding the property to the data itself.
+We can develop this idea further by taking the property designated by the predicate, and adding to the data the predicate describes.
 
-So instead of having a predicate like this:
+For example, instead of having a predicate function like this:
 
 ```clojure
 ;; The data:
 (def animal {:type "sheep"
              :name "Milly"})
 
-;; The predicate:
+;; The predicate function:
 (defn four-legged? [animal]
   (contains? #{"sheep" "cow" "pig"} (:type animal))
 
 (four-legged? animal)
+=> true
+```
+
+Or a predicate set like this:
+```clojure
+;; The data:
+(def animal {:type "sheep"
+             :name "Milly"})
+
+;; The predicate set:
+(def four-legged? #{"sheep" "cow" "pig"})
+
+(four-legged? (:type animal))
 => true
 ```
 
@@ -74,8 +87,8 @@ We can package the `four-legged?` predicate with the data:
 => true
 ```
 
-Either way, the effect is the same. We can determine that the animal is four-legged or not.
+Either way, the effect is the same. We can determine that the animal is four-legged or not. This demonstrates a predicate function is a way to describe a property of data that is separate from the data itself.
 
-We now have three ways of representing the "four-leggedness" property of an animal: as a set, as a predicate function, or a key on the data itself. Each way has its benefits and downsides, but each are equivalent as far as the "four-leggedness" abstraction is concerned. In general, if you have a property you wish to designate on an object or piece of data, you have these three ways to do it.
+We now have three methods to define the "four-leggedness" property of an animal: a set, a predicate function, or a key on the data itself. Each method has its benefits and downsides, but each are equivalent in outcome. In general, if you have a property you want to designate about an object or piece of data, you have these three ways to do it.
 
-Through this lens, whether you define a property as a set, predicate, or a key on a map is now an implementation detail. If you want to, you could hide that choice from other parts of the code, so they don't know *how* it works. Only the abstraction matters when you reason about *why* the program works.
+Through this lens, whether you define a property as a set, predicate, or a key on a map is now an implementation detail. If you want to, you can hide the choice of method from other parts of the code, so they don't depend on *how* it works. Only the abstraction of a property matters when you reason about *why* the program works.
