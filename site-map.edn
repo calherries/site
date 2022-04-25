@@ -29,10 +29,10 @@
   :path     "posts/predicate-set-duality.html"
   :template :post}
  {:date     "2022-04-25"
-  :source   "posts/2022-04-25-whats-in-an-abstraction.md"
-  :title    "What's in an abstraction?"
+  :source   "posts/2022-04-25-abstraction.md"
+  :title    "Abstraction"
   :section  "Programming"
-  :path     "posts/whats-in-an-abstraction.html"
+  :path     "posts/abstraction.html"
   :template :post}
  #_{:date     "2022-03-15"
     :source   "posts/2022-03-15-more-engineering-less-craftsmanship.md"

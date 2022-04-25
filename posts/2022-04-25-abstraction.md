@@ -1,4 +1,4 @@
-# What's in an abstraction?
+# Abstraction
 
 Abstraction is a widely used, but deeply overloaded term. Programming is full of tropes like "program at the right level of abstraction", and "avoid premature abstraction".
 
@@ -6,16 +6,20 @@ Like many, I consider it an indispensable term for reasoning in programming disc
 
 Let's start with the definition from Rich Hickey: "Abstraction is about drawing from a set of exemplars some essential thing."
 
-Note this definition of abstraction is recursive: abstraction is _itself_ an abstraction.
+(Fun side note: this definition is recursive: abstraction is _itself_ an abstraction.)
 
-To help explain it, let's look at an example: the collection abstraction in Clojure. A collection supports three operations:
+If abstraction is understood as drawing from a set of exemplars, let's look at an example: the collection abstraction in Clojure. 
+
+A collection supports three operations:
 - count - for getting the size of the collection
 - conj - for 'adding' to the collection
 - seq - to get a sequence that can walk the entire collection
 
-The abstraction is defined by these operations, combined with these laws:
+The collection abstraction is defined by these operations, combined with these invariants:
 - the sequence of items in the collection contains all the items that have been added to the collection
 - the size of the collection is equal to number of items that have been added to the collection
+
+These properties adhere to Rich's definition of an abstraction. If something has an implementation for the above operations, which satisfy these invariants, it is a collection.
 
 This idea of a collection is an abstract one, precisely because it omits details of how it works. There is not enough information in the definition to create a working collection. There is only enough information to say what a collection _is_. The abstraction does not specify anything about how its invariants are maintained, or how its operations are implemented. That is the job of the abstraction's concretions. This reveals a fundamental property of abstraction: if an abstraction is about finding common things
 
@@ -46,6 +50,14 @@ Functions are black boxes that take inputs, might do something, and return a val
 **Classes**
 
 Classes combine interfaces (the classes' methods) with implementations of the interface. If an interface isn't required for an abstraction, a class certainly isn't.
+
+**Types**
+
+A type is a set of values, together with the ability to constrain the available operations you can make on each value of the type. An abstraction is not a type, because it doesn't allow you to constrain operations in any way, as a type does. Two examples: the collection abstraction isn't a type, and neither is the point abstraction above. The confusion here is that creating a type often comes with a new abstraction. For example, creating a Point type in Haskell:
+
+```
+data Point = MakePoint Double Double
+```
 
 ### Why should we care?
 
