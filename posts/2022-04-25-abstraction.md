@@ -27,7 +27,9 @@ This idea of a collection is an abstract one because it leaves out details of ho
 
 A value is said to be a concretion of an abstraction if it has all the properties of the abstraction. But it can have other properties too. For example, the collection could be ordered, or not. It could have 0(1) access, or not. But if all you know about something is that it is a collection, you cannot know any of these things. We can say these properties are not known in the abstract domain.
 
-It is sometimes helpful to imagine an abstraction as a function of concrete collections to abstract collections, called an abstraction function. The function is surjective: For every abstract value, there are one or more corresponding concrete values.
+It is sometimes helpful to imagine an abstraction as a function of concrete values to abstract values. This function is called an abstraction function, or abstraction mapping. The function is surjective: For every abstract value, there are one or more corresponding concrete values.
+
+In the case of a collection, an abstraction is a mapping of concrete collections like sequences, vectors, and sets, to abstract collections, which omit all other properties.
 
 ```text
 the sequence '(1 2 3)
