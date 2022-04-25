@@ -29,7 +29,7 @@ A value is said to be a concretion of an abstraction if it has all the propertie
 
 It is sometimes helpful to imagine an abstraction as a function of concrete collections to abstract collections, called an abstraction function. The function is surjective: For every abstract value, there are one or more corresponding concrete values.
 
-```
+```text
 the sequence '(1 2 3)
 the vector    [1 2 3]    =>   these all map to the same abstract collection
 the set      #{1 2 3}
@@ -71,16 +71,18 @@ A type is a set of values that a compiler can use to constrain the operations ma
 datatype point = Point of (double * double)
 ```
 
-Here a `point` is defined as a product type of doubles that is created using the type constructor `Point`. But by doing so we have already made more assumptions about a point than are necessary for a point abstraction. Here we are saying three things that aren't necessary for the point abstraction:
+Here a `point` is a product type of doubles that is created using the type constructor `Point`. But by defining it this way we have already made more assumptions than necessary for a point abstraction. 
+
+Here are four things defined above that aren't necessary for a point abstraction:
 - Points need to be created with the `Point` type constructor
 - X and Y are doubles
-- X and Y can be accessed by pattern matching on the type
-- Points can contain no other information other than X and Y. You can't add a 3rd dimension to a point, or an ID, or include a name.
+- X and Y can be accessed by pattern matching on a value of type `Point`
+- Points can contain no other information other than X and Y. You can't add a 3rd dimension to a point, or an ID, or give the point a name.
 
-These smell like implementation details. Here is all that is needed for a 2D point abstraction: 
+These smell like implementation details. From my perspective, these are the only properties you need to know about a 2D point: 
 
-- A point has at least two values, which represent the x and y axes in vector space.
-- Operations on points should be defined to adhere to the axioms in mathematics. For example, addition of two points should do pointwise addition.
+1. A point has at least two values, which represent the x and y axes in vector space.
+2. Operations on points should be defined to adhere to the axioms in mathematics. For example, addition of two points should do pointwise addition.
 
 In the examples of points in Clojure shown previously, few assumptions were made. The common thread between them all is that they have X and Y points defined (somehow), and you could _imagine_ defining operations on them that match mathematical axioms.
 
