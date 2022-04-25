@@ -1,8 +1,8 @@
 # Abstraction
 
-Abstraction is a widely used, but deeply overloaded term. Programming is full of tropes like "program at the right level of abstraction", and "avoid premature abstraction", or even "every abstraction is leaky". All these uses of the term hint at a program as a hierarchy of levels, and these levels are abstractions. But what defines these levels, really? You can definitely _feel_ them, but can you explain?
+Abstraction is a widely used, but deeply overloaded term. Programming is full of tropes like "program at the right level of abstraction", "avoid premature abstraction", and "every abstraction is leaky". All these imply a program is a hierarchy of levels, and these levels are abstractions. But what defines these levels, really? You can definitely _feel_ them, but can you explain what they are?
 
-We could continue to be imprecise about what we mean by abstraction. Abstraction is a pretty successful idea in the software engineering world, even if most people use it without saying exactly what it means. But I still find it hard to talk about abstraction. We need to share a common language to make progress. Hopefully reading this post can help future discussions on the subject.
+We could continue to be imprecise about what we mean by abstraction. Abstraction is a pretty successful idea in the software engineering world, even if most people use it without saying exactly what it means. But I find it hard to talk about abstraction in real-world conversations. We need to share a common language to make progress. Hopefully reading this post can help future discussions on the subject.
 
 Let's start with the definition from Rich Hickey: "Abstraction is about drawing from a set of exemplars some essential thing."
 
