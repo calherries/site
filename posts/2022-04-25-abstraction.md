@@ -43,19 +43,21 @@ Now that we know what an abstraction is, let's acknowledge some things that are 
 
 These enumerate operations on a data type, but they are not abstractions since they omit all other types of information. For example, the IPersistentCollection is the interface for the collection in Clojure, and says that all collections must implement `count`, `conj`, and `seq` operations. But it says nothing about the invariants of these operations.
 
-An interface/protocol/typeclass is not even necessary to create an abstraction. Consider the abstraction of a point in 2D space. Here are three examples of points:
+An interface/protocol/typeclass is not even necessary to create an abstraction. Consider the abstraction of a point in 2D space. Here are three examples of points in Clojure:
 
-```
+```clojure
 (def my-map-point {:x 10 :y 20})
 (def my-vector-point [10 20])
 (def my-string-point "Point(10, 20)")
 ```
 
-We could unite all these instances under one interface that defines a set of valid operations on points. That might be good programming practice, but it's unnecessary. In fact, we already know what a point is without writing _any_ code. We can simply imagine it. To prove my point, consider how the above examples map to a specific abstract value, namely the point where x=10 and y=20. We didn't need a protocol, interface, or typeclass to know that.
+We could unite these instances under one interface and define a set of valid operations on points. That might be good programming practice, but it's unnecessary. In fact, we already know what a point is without writing _any_ code. We can simply imagine it. To prove my point, consider how the above examples map to a specific abstract value, namely the point where x=10 and y=20. We didn't need a protocol, interface, or typeclass to know that.
 
 **Functions**
 
-Functions are black boxes that take inputs, might do something, and return a value. Functions can be used to transform or remove information from a complex value into a simpler representation. This can sometimes looks equivalent to an abstraction, but it isn't the same. For example, would you say Java's `Integer.parseInt` function is an abstraction? Not quite. It converts a value of type `String[]` to the `int` type, but it doesn't say anything else. An integer is actually an abstraction where the operations adhere to certain mathematical axioms like addition and substraction. `Integer.parseInt` just converts between two representations of integers: `String[]` and `int`. `"1010" :: String[]` represents the same integer as `10 :: int`, just as `"1010" + "0001" = "1011"` represents the same operation as `10 + 1 = 11`. The conversion between representations of an abstraction is not what defines an abstraction.
+Functions are black boxes that take inputs, might do something, and return a value. Functions can be used to transform or remove information from a complex value into a simpler representation. This can sometimes looks equivalent to an abstraction, but it isn't the same.
+
+For example, would you say Java's `Integer.parseInt` function is an abstraction? Not quite. It converts a value of type `String[]` to the `int` type, but it doesn't say anything else. An integer is actually an abstraction where the operations adhere to certain mathematical axioms like addition and substraction. `Integer.parseInt` just converts between two representations of integers: `String[]` and `int`. A value `"1010" : String[]` represents the same integer as the value `10 : int`, just as `"1010" + "0001" = "1011"` represents the same operation as `10 + 1 = 11`. The conversion between representations of an abstraction is not what defines an abstraction.
 
 **Classes**
 
@@ -65,11 +67,11 @@ Classes combine an interface (the list of the class's methods) with implementati
 
 A type is a set of values that a compiler can use to constrain the operations made on each of its members. An abstraction is not a type, because there is nothing in its definition that allows the compiler to constrain operations in any way, as a type does. Two examples: the collection abstraction isn't a type, and neither is the point abstraction above. But is every type an abstraction? Well, here is a definition of a tree type in ML:
 
-```
+```ML
 datatype point = Point of (double * double)
 ```
 
-Here, a `point` is defined as a product type of doubles, that is created using the type constructor `Point`. But by doing so we have already made more assumptions about a point than are necessary for a point abstraction. Here we are saying three things that aren't necessary for the point abstraction:
+Here a `point` is defined as a product type of doubles that is created using the type constructor `Point`. But by doing so we have already made more assumptions about a point than are necessary for a point abstraction. Here we are saying three things that aren't necessary for the point abstraction:
 - Points need to be created with the `Point` type constructor
 - X and Y are doubles
 - X and Y can be accessed by pattern matching on the type
