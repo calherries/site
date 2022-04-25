@@ -17,11 +17,11 @@ A collection supports three operations:
 - `conj` - for 'adding' to the collection
 - `seq` - to get a sequence that can walk the entire collection.
 
-The collection abstraction is defined by these operations, combined with these invariants:
+The operations maintain these invariants:
 - the sequence of items in the collection contains all the items that have been added to the collection
 - the size of the collection is equal to number of items that have been added to the collection
 
-These properties adhere to Rich's definition of an abstraction. If you have implementations for these operations, and the operations satisfy these invariants, you have a collection.
+These properties adhere to Rich's definition of an abstraction. If something has implementations for these operations, and the operations satisfy these invariants, that thing is a collection.
 
 This idea of a collection is an abstract one because it leaves out details of how it works. There is not enough information in the definition to create a working collection. There is only enough information to say what a collection _is_. The collection abstraction does not specify anything about how its invariants are maintained, how its operations are implemented, or even how to create one. That is the job of the abstraction's concretions. 
 
