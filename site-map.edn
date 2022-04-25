@@ -28,10 +28,15 @@
   :section  "Programming"
   :path     "posts/predicate-set-duality.html"
   :template :post}
- #_{:date     "2022-03-15"
-  :source   "posts/2022-03-15-more-engineering-less-craftsmanship.md"
-  :title    "More engineering, less craftsmanship"
-  :path     "posts/more-engineering-less-craftsmanship.html"
-  :section  "General"
+ {:date     "2022-04-25"
+  :source   "posts/2022-04-25-whats-in-an-abstraction.md"
+  :title    "What's in an abstraction?"
+  :section  "Programming"
+  :path     "posts/whats-in-an-abstraction.html"
   :template :post}
- ]
+ #_{:date     "2022-03-15"
+    :source   "posts/2022-03-15-more-engineering-less-craftsmanship.md"
+    :title    "More engineering, less craftsmanship"
+    :path     "posts/more-engineering-less-craftsmanship.html"
+    :section  "General"
+    :template :post}]
