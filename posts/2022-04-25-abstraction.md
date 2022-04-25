@@ -25,7 +25,7 @@ These properties adhere to Rich's definition of an abstraction. If something has
 
 This idea of a collection is an abstract one because it leaves out details of how it works. There is not enough information in the definition to create a working collection. There is only enough information to say what a collection _is_. The collection abstraction does not specify anything about how its invariants are maintained, how its operations are implemented, or even how to create one. That is the job of the abstraction's concretions. 
 
-A value is said to be a concretion of an abstraction if it has all the properties of the abstraction. But it can have other properties too. For example, the collection could be ordered, or not. It could have 0(1) access, or not. But these properties are not considered, in the abstract domain. If all you know about something is that it is a collection, you cannot know any of these things.
+A value is said to be a concretion of an abstraction if it has all the properties of the abstraction. But it can have other properties too. For example, the collection could be ordered, or not. It could have 0(1) access, or not. But if all you know about something is that it is a collection, you cannot know any of these things. We can say these properties are not known in the abstract domain.
 
 It is sometimes helpful to imagine an abstraction as a function of concrete collections to abstract collections, called an abstraction function. The function is surjective: For every abstract value, there are one or more corresponding concrete values.
 
