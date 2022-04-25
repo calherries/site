@@ -11,9 +11,9 @@ Let's start with the definition from Rich Hickey: "Abstraction is about drawing 
 If abstraction is understood as drawing from a set of exemplars, let's look at an example Rich created himself: the collection abstraction in Clojure. 
 
 A collection supports three operations:
-- count - for getting the size of the collection
-- conj - for 'adding' to the collection
-- seq - to get a sequence that can walk the entire collection
+- `count` - for getting the size of the collection
+- `conj` - for 'adding' to the collection
+- `seq` - to get a sequence that can walk the entire collection
 
 The collection abstraction is defined by these operations, combined with these invariants:
 - the sequence of items in the collection contains all the items that have been added to the collection
@@ -27,11 +27,11 @@ The set of concretions for the collection abstraction include anything that cont
 
 It's worth taking a step back and acknowledging some things that are clearly not abstractions by themselves:
 
-**Interfaces and protocols**
+**Interfaces, protocols or typeclasses**
 
-An interface or protocol is not sufficient to create an abstraction. Things that describe the operations on a data type are not abstractions, since they omit invariants. The IPersistentCollection is the interface for the collection in Clojure, but it is clearly not the abstraction in itself. 
+These enumerate operations on a data type, but they are not abstractions since they omit all other types of information. For example, the IPersistentCollection is the interface for the collection in Clojure, and says that all collections must implement `count`, `conj`, and `seq` operations. But it says nothing about the invariants of these operations.
 
-Interfaces or protocols are not even necessary to create an abstraction. Consider the abstraction of a point in 2D space. Here are three 
+An interface/protocol/typeclass is not even necessary to create an abstraction. Consider the abstraction of a point in 2D space. Here are three examples of points:
 
 ```
 (def my-map-point {:x 10 :y 20})
@@ -39,15 +39,15 @@ Interfaces or protocols are not even necessary to create an abstraction. Conside
 (def my-string-point "Point(10, 20)")
 ```
 
-We could create a protocol that define a set of valid operations on points. That might be good programming practice, but it's unnecessary to imagine the point abstraction. We already know what a point is without writing _any_ code. To prove my point, consider how the above examples clearly map to the same value in the abstract space.
+We could unite all these instances under one interface that defines a set of valid operations on points. That might be good programming practice, but it's unnecessary. In fact, we already know what a point is without writing _any_ code. We can simply imagine it. To prove my point, consider how the above examples map to a specific abstract value, namely the point where x=10 and y=20. We didn't need a protocol, interface, or typeclass to know that.
 
 **Functions**
 
-Functions are black boxes that take inputs, might do something, and return a value. They're helpful for making concretions, but they aren't an abstraction in themselves.
+Functions are black boxes that take inputs, might do something, and return a value. Functions can be used to transform or remove information from a complex value into a simpler representation. This can sometimes looks equivalent to an abstraction, but it isn't the same. For example, would you say Java's `Integer.parseInt` function is an abstraction? It converts `String[]` to the `int` type. Not quite. An integer is a value of the abstract type, whose operations adhere to certain mathematical axioms like addition and substraction. Both the input and output types of `Integer.parseInt`, `String[]` and `int`, are two representations of integers. `"0101" :: String[]` maps to the same integer as `10 :: int`, but they are equally both concretions. Both need to operate the same way under integer addition.
 
 **Classes**
 
-Classes combine interfaces (the classes' methods) with implementations of the interface. If an interface isn't required for an abstraction, a class certainly isn't.
+Classes combine an interface (the list of the class's methods) with implementations of the interface. If an interface isn't required for an abstraction, a class is certainly even more overkill. All previous arguments apply.
 
 **Types**
 
