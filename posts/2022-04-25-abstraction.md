@@ -65,13 +65,15 @@ Classes combine an interface (the list of the class's methods) with implementati
 
 **Types**
 
-A type is a set of values that a compiler can use to constrain the operations made on each of its members. An abstraction is not a type, because there is nothing in its definition that allows the compiler to constrain operations in any way, as a type does. Two examples: the collection abstraction isn't a type, and neither is the point abstraction above. But is every type an abstraction? Well, here is a definition of a tree type in ML:
+A type is a set of values that a compiler can use to constrain the operations made on each of its members. An abstraction is not a type, because there is nothing in its definition that allows the compiler to constrain operations in any way, as a type does. Two examples: the collection abstraction isn't a type, and neither is the point abstraction above. Case closed. 
+
+But is every type an abstraction? Well, here is a definition of a tree type in ML:
 
 ```ML
 datatype point = Point of (double * double)
 ```
 
-Here a `point` is a product type of doubles that is created using the type constructor `Point`. But by defining it this way we have already made more assumptions than necessary for a point abstraction. 
+Here, a `point` is a product type of doubles that is created using the type constructor `Point`. But by defining it this way we have already made more assumptions than necessary for a point abstraction. 
 
 Here are four things defined above that aren't necessary for a point abstraction:
 - Points need to be created with the `Point` type constructor
