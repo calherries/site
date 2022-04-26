@@ -32,8 +32,10 @@ It is sometimes helpful to imagine an abstraction as a function of concrete valu
 In the case of a collection, an abstraction is a mapping of concrete collections (like sequences, vectors, and sets) to abstract collections, which omit all other properties.
 
 ```text
+   CONCRETE DOMAIN                 ABSTRACT DOMAIN
+
 the sequence '(1 2 3)
-the vector    [1 2 3]    =>   these all map to the same abstract collection
+the vector    [1 2 3]    =>   a collection of 1, 2 and 3.
 the set      #{1 2 3}
 ```
 
