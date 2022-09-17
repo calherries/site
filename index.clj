@@ -28,6 +28,7 @@
 (def index-page
   [:html
    [:head
+    [:title "Cal Herries"]
     [:meta {:charset "UTF-8"}]
     [:meta {:name "description" :content "My personal site."}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
@@ -78,17 +79,16 @@
 (defn post-page [body]
   [:html
    [:head
-    [:meta {:charset "UTF-8"}]
     [:title "Cal Herries"]
-    [:meta {:name "description" :content "My personal site."}]
+    [:meta {:charset "UTF-8"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-    [:link {:rel "icon" :type "image/x-icon" :href "../resources/images/favicon.ico"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/app-components.css"}]
     [:link {:rel "stylesheet" :href "../resources/public/css/app-utilities.css"}]]
    [:body {:class "p-8"}
-    [:div {:class "flex gap-5 mb-4"}
-     [:h2 [:a {:style {:color "blue"} :href "/"} "Home"]]]
-    [:div {:class "my-3"}
+    [:a {:style {:color "blue"
+                 :font-weight "bold"
+                 :text-decoration "none"} :href "/"} "←"]
+    [:div
      body]]])
 
 (doseq [{:keys [path body]} posts]
