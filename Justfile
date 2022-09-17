@@ -32,5 +32,5 @@ sync:
 deploy:
   just build-assets
   git add -A
-  git commit -m "Deployment"
+  git commit -m "u"
   git push

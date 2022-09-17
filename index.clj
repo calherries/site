@@ -35,39 +35,39 @@
     [:link {:rel "stylesheet" :href "resources/public/css/app-utilities.css"}]]
    [:body {:class "p-8"}
     [:pre [:code]] ; Hack for postcss to not purge these elements code
-    [:div {:class "mt-5"}
-     "Things you should know about me:"
+    [:div {:class "mb-5"}
+     [:b "About me"]
      [:ul
       [:li "I know very little about anything (but I'm working on it)."]
       [:li "I spend most of my time writing bits of text to solve problems."]
       [:li "Most of these problems are caused by other bits of text, usually written by me."]]]
-    [:div {:class "mt-5"}
-     "Things I've worked on recently:"
+    [:div {:class "mb-5"}
+     [:b "Projects"]
      [:ul
       [:li [:a {:href "https://github.com/calherries/rich"} "Rich"] ", a rich text editor for ClojureScript"]
       [:li [:a {:href "https://github.com/calherries/graft"} "Graft"] ", a <100 LOC graph data structure for Clojure"]]]
-    [:div {:class "mt-5"}
-     "Things you can click on:"
-     [:ul
-      [:li [:a {:href "https://github.com/calherries"} "Github"] ", a place where I solve some problems and create others"]
-      [:li [:a {:href "https://twitter.com/calherries"} "Twitter"] ", a place for random bursts of coherence"]]]
-    [:div {:class "mt-5"}
-     "Thoughts on programming:"
+    [:div {:class "mb-5"}
+     [:b "Thoughts on programming"]
      [:ul
       (for [{:keys [title path]} (filter #(= (:section %) "Programming") posts)]
         [:li
          [:a {:href path} title]])]]
-    [:div {:class "mt-5"}
-     "Other ramblings:"
+    [:div {:class "mb-5"}
+     [:b "Ramblings"]
      [:ul
       (for [{:keys [title path]} (filter #(= (:section %) "General") posts)]
         [:li
          [:a {:href path} title]])]]
-    [:div {:class "my-5"}
-     "Linked lists"
+    [:div {:class "mb-5"}
+     [:b "Linked lists"]
      [:ul
       [:li [:a {:href "/papers.html"} "Papers I love"]]
-      [:li [:a {:href "/books.html"} "Book shelf"]]]]]])
+      [:li [:a {:href "/books.html"} "Book shelf"]]]]
+    [:div {:class "mb-5"}
+     [:b "Elsewhere"]
+     [:ul
+      [:li [:a {:href "https://github.com/calherries"} "Github"]]
+      [:li [:a {:href "https://twitter.com/calherries"} "Twitter"]]]]]])
 
 (prn "Updated index")
 (spit "index.html" (utils/convert-to index-page :html))
