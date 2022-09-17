@@ -40,9 +40,9 @@
      [:b "About me"]
      [:ul
       [:li "I know very little about anything (but I'm working on it)."]
-      [:li "I spend most of my time writing bits of text into a screen."]
+      [:li "I spend most of my time writing text."]
       [:li "Occasionally my writing solves interesting problems."]
-      [:li "But most of the time, I'm solving problems caused by other bits of text, usually written by me."]]]
+      [:li "But most of the time, my writing solves problems caused by other bits of text, usually written by me."]]]
     [:div {:class "mb-5"}
      [:b "Projects"]
      [:ul
