@@ -1,6 +1,6 @@
 :root {
-	--font-primary: 'Inter', sans-serif;
-	--font-size-default: 16px;
+	--font-primary: 'Helvetica', sans-serif;
+	--font-size-default: 13px;
 	--font-size-header: 32px;
 }
 
@@ -12,12 +12,11 @@
     @apply flex;
     @apply flex-col;
     font-weight: 400;
+    line-height: 1.4;
     font-family: var(--font-primary);
     font-size: var(--font-size-default);
-    letter-spacing: -0.5px;
-    line-height: 1.6;
-    @apply max-w-screen-md;
-    @apply text-gray-700;
+    @apply max-w-screen-xs;
+    @apply text-gray-900;
   }
   h1 {
     font-family: var(--font-primary);
@@ -32,13 +31,17 @@
   }
   ul {
     @apply list-disc;
-    @apply pl-10;
+    @apply pl-4;
   }
   a {
-    @apply border-b-2;
-    @apply border-gray-500;
+    text-decoration: underline;
+    color: -webkit-link;
+  }
+  pre {
+    background: #f7fafc;
   }
   code {
-    @apply text-sm;
+    font-size: 0.7rem;
+    background-color: #f9f9f9;
   }
 }

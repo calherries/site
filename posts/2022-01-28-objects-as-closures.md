@@ -1,6 +1,6 @@
 # Objects as Closures
 
-We engineers often talk about objects as concrete features of a language. For example, a JavaScript object, or a Python object. But objects are an abstract idea that can be implemented without using specific language features. In fact, every programming language with first class functions and lexical scoping can implement objects, even if objects are not officially supported at the language level.
+Objects are an abstract idea that can be implemented without using specific language features. Every programming language with first class functions and lexical scoping can implement objects, even if objects are not officially supported at the language level.
 
 To demonstrate, let's compare stack objects in Python and Clojure.
 
@@ -66,9 +66,9 @@ It's a bit noisier than the Python version, but it works in a similar way. Here'
 ```
 Notice the similarity?
 
-The new-stack "class" in Clojure is just a function that returns a function with access to the state. The returned function is called a closure because the function's open variables (in this case `elements`) have been closed by the surrounding environment. 
+The new-stack "class" in Clojure is just a function that returns another function with access to the mutable state. The returned function is called a closure because the function's open variables (in this case `elements`) have been _closed_ by the surrounding environment. 
 
-That function closure is an object! It has it's own state, and has a set of methods that operate on that state. You can get a method from the object by calling the object function with the method name. Once you've got the method, you can call it like a normal function. The difference between a method and a typical function is that the method has privileged access to the object's hidden internal state.
+That function closure is an object. It has it's own state, and has a set of methods that operate on that state. You can get a method from the object by calling the object function with the method name. Once you've got the method, you can call it like a normal function. The difference between a method and a typical function is that the method has privileged access to the object's hidden internal state.
 
 ```Clojure
 object  method-name
@@ -76,12 +76,12 @@ object  method-name
    |       |
    .       .
 ((stack :push) 3)
-  ...........  .
-       |       |
-       |       |
-       |       |
-       |       |
-    method   method-argument
+               .
+               |
+               |
+               |
+               |
+        method-argument
 ```
 
 There's no built-in `class` symbol in Clojure that can create objects for us. But that doesn't mean it doesn't support OOP! At the level of the object abstraction, the Python class and the Clojure function achieve the same goal. Python classes can do more than just define objects, like enable inheritance. Inheritance is an added feature to objects, and wasn't included in Alan Kay's original vision for OOP.

@@ -20,7 +20,7 @@ build-html:
   bootleg milo.clj -o milo.html 
 
 dev:
-  npx onchange -i $(find . -name '*.clj' -o -name '*.md') -- just build-html
+  npx onchange -i $(find . -name '*.clj' -o -name '*.md') -- just build-html & just build-css-dev
 
 build-assets:
   just build-css-prod
