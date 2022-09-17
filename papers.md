@@ -7,3 +7,4 @@
 - [Design by Contract](http://se.inf.ethz.ch/~meyer/publications/old/dbc_chapter.pdf)
 - [Higher order + Polymorphic = Reusable](https://kar.kent.ac.uk/21504/3/Higher-order_+_Polymorphic_=_Reusable.pdf)
 - [Recursive Functions of Symbolic Expressions and Their Computation by Machine](http://www-formal.stanford.edu/jmc/recursive.pdf)
+- [Notation as a Tool of Thought](https://www.jsoftware.com/papers/tot.htm)

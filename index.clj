@@ -40,21 +40,22 @@
      [:b "About me"]
      [:ul
       [:li "I know very little about anything (but I'm working on it)."]
-      [:li "I spend most of my time writing bits of text to solve problems."]
-      [:li "Most of these problems are caused by other bits of text, usually written by me."]]]
+      [:li "I spend most of my time writing bits of text into a screen."]
+      [:li "Occasionally my writing solves interesting problems."]
+      [:li "But most of the time, I'm solving problems caused by other bits of text, usually written by me."]]]
     [:div {:class "mb-5"}
      [:b "Projects"]
      [:ul
       [:li [:a {:href "https://github.com/calherries/rich"} "Rich"] ", a rich text editor for ClojureScript"]
       [:li [:a {:href "https://github.com/calherries/graft"} "Graft"] ", a <100 LOC graph data structure for Clojure"]]]
     [:div {:class "mb-5"}
-     [:b "Thoughts on programming"]
+     [:b "On programming"]
      [:ul
       (for [{:keys [title path]} (filter #(= (:section %) "Programming") posts)]
         [:li
          [:a {:href path} title]])]]
     [:div {:class "mb-5"}
-     [:b "Ramblings"]
+     [:b "On life"]
      [:ul
       (for [{:keys [title path]} (filter #(= (:section %) "General") posts)]
         [:li
