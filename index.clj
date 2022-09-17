@@ -64,7 +64,7 @@
         [:li
          [:a {:href path} title]])]]
     [:div {:class "my-5"}
-     "Links"
+     "Linked lists"
      [:ul
       [:li [:a {:href "/papers.html"} "Papers I love"]]
       [:li [:a {:href "/books.html"} "Book shelf"]]]]]])
