@@ -68,13 +68,9 @@ That function closure is an object. It has it's own state, and has a set of meth
 ```Clojure
 object  method-name
    |       |
-   |       |
    .       .
 ((stack :push) 3)
                .
-               |
-               |
-               |
                |
         method-argument
 ```
