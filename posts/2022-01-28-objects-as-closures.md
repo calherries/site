@@ -1,4 +1,4 @@
-# Objects as Closures
+# Objects as closures
 
 Objects are an abstract idea that can be implemented without using specific language features. Every programming language with first class functions and lexical scoping can implement objects, even if objects are not officially supported at the language level.
 
