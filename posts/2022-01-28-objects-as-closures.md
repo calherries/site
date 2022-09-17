@@ -20,11 +20,6 @@ class Stack:
       return result
     else:
       return None
-
-stack = Stack()
-stack.push(1)
-stack.push(2)
-print(stack.elements)
 ```
 And here's how we use it:
 ```
