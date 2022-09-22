@@ -47,7 +47,7 @@
      [:b "Projects"]
      [:ul
       [:li [:a {:href "https://github.com/calherries/rich"} "Rich"] ", a rich text editor for ClojureScript"]
-      [:li [:a {:href "https://github.com/calherries/graft"} "Graft"] ", a <100 LOC graph data structure for Clojure"]]]
+      [:li [:a {:href "https://github.com/calherries/graft"} "Graft"] ", a 30 LOC graph database implementation for Clojure"]]]
     [:div {:class "mb-5"}
      [:b "On programming"]
      [:ul
