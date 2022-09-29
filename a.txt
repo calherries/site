@@ -1,0 +1,192 @@
+;; the task: 
+;; allow the user to create named counters that they can 
+;; selectively increment in the repl. When the first counter counts to 
+;; 10, reset all counters to zero.
+
+;; 1. solution with lexical scope
+;;    closures are abused to hide state
+;;    we need the observer pattern to maintain global invariants
+
+;; 26 LOC, 2 objects, 6 methods
+
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :add-observer (swap! observers conj (first args))))))
+
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! Top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+
+;; Usage example
+;; (def c1 (create-counter :c1))
+;; (def c2 (create-counter :c2))
+;; (def o (create-counter-observer))
+;; (c1 :count)
+;; (c1 :count)
+;; (c2 :count)
+;; (c2 :count)
+;; ... etc
+;; Done counting! Top counter: :c1
+
+
+
+createSelector 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

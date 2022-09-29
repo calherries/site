@@ -3,7 +3,7 @@
 ;   when connected to a REPL session.
 ; Please see https://calva.io/output/ for more info.
 ; Happy coding! ♥️
-; Starting Jack-in Terminal: bb --nrepl-server 54240
+; Starting Jack-in Terminal: bb --nrepl-server 56934
 ; Hooking up nREPL sessions...
 ; Connected session: clj
 ; TIPS:
@@ -14,6 +14,4589 @@
 ;      when the cursor is after the last contents at the prompt
 ;   - Clojure lines in stack traces are peekable and clickable.
 clj꞉user꞉>  ; Use `alt+enter` to evaluate
-; Bad url: localhost:
 ; Jack-in done.
 clj꞉user꞉> 
+(ns core)
+nil
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :clear (reset! s [])))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :clear (reset! s [])))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :clear (reset! s [])))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :clear (reset! s [])))))
+#'core/create-counter
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :push 1)
+; clojure.lang.ArityException: Wrong number of args (2) passed to: sci.impl.fns/fun/arity-1--3532 core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :clear (reset! s [])))))
+#'core/create-counter
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+1
+clj꞉core꞉> 
+(c :print)
+; java.lang.IllegalArgumentException: No matching clause: :print core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(c :count)
+2
+clj꞉core꞉> 
+(c :print)
+; java.lang.IllegalArgumentException: No matching clause: :print core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(c :count)
+3
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :clear (reset! s 0)))))
+#'core/create-counter
+clj꞉core꞉> 
+(c :count)
+4
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (do (swap! s inc) nil)
+        :value @s
+        :clear (reset! s 0)))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (do (swap! s inc) nil)
+        :value @s
+        :clear (reset! s 0)))))
+#'core/create-counter
+clj꞉core꞉> 
+(c :count)
+5
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :value)
+1
+clj꞉core꞉> 
+(defn push [id item]
+  (swap! stacks update id conj item) nil)
+; clojure.lang.ExceptionInfo: Could not resolve symbol: stacks core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :value)
+3
+clj꞉core꞉> 
+(c :value)
+3
+clj꞉core꞉> 
+(def counters (atom []))
+#'core/counters
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (do (swap! s inc) nil)
+        :value @s
+        :name name
+        :clear (reset! s 0)))))
+#'core/create-counter
+clj꞉core꞉> 
+(swap! counters update name c)
+; java.lang.IllegalArgumentException: No matching clause:  core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+counters
+#object [clojure.lang.Atom 0x34e8fdc9 {:status :ready, :val []}]
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(swap! counters update name c)
+; java.lang.IllegalArgumentException: No matching clause:  core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(swap! counters update (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause:  core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(defn create-counter [name]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (do (swap! s inc) nil)
+        :value @s
+        :name name
+        :clear (reset! s 0)))))
+#'core/create-counter
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(swap! counters update (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause:  core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(c :name)
+"c1"
+clj꞉core꞉> 
+(swap! counters update (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause:  core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(swap! counters update (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause:  core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(swap! counters update (c :name) 1)
+; java.lang.ClassCastException: java.lang.Long cannot be cast to clojure.lang.IFn core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(c :name)
+"c1"
+clj꞉core꞉> 
+(update {} "c1" 1)
+; java.lang.ClassCastException: java.lang.Long cannot be cast to clojure.lang.IFn core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(assoc {} "c1" 1)
+{"c1" 1}
+clj꞉core꞉> 
+(swap! counters assoc (c :name) c)
+{"c1" #object
+       [sci.impl.fns$fun$arity_1__3532 0x49259533
+        "sci.impl.fns$fun$arity_1__3532@49259533"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(def longest-counter (atom nil))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :longest-counter
+           (fn [_key _ref old-state new-state]
+             (for [[name counter] new-state]
+               (counter :value))))
+#object
+ [clojure.lang.Atom 0x8c358d8
+  {:status :ready,
+   :val {"c1" #object
+               [sci.impl.fns$fun$arity_1__3532 0x49259533
+                "sci.impl.fns$fun$arity_1__3532@49259533"]}}]
+clj꞉core꞉> 
+(add-watch longest-counter :print-new-longest-counter
+           (fn [_key _ref old-counter new-counter]
+             (when (not= (id old-counter) (id new-counter))
+               (println "New longest counter is" new-state))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: id core /Users/callumherries/code/site/a.clj:3:26
+clj꞉core꞉> 
+(defn create [id]
+  (swap! counters assoc id 0)
+  nil)
+#'core/create
+clj꞉core꞉> 
+(create :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+; java.lang.UnsupportedOperationException: count not supported on this type: Keyword core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(defn create [id]
+  (swap! counters assoc id 0)
+  nil)
+#'core/create
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc)
+  nil)
+#'core/count
+clj꞉core꞉> 
+(create :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (> count longest-count)
+              [id count]
+              [longest-id longest-count]))
+          0
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (if (< (longest-counter old-state) (longest-counter new-state))
+               old-state
+               new-state)))
+#object
+ [clojure.lang.Atom 0x8c358d8
+  {:status :ready,
+   :val {:s1 3,
+         "c1" #object
+               [sci.impl.fns$fun$arity_1__3532 0x49259533
+                "sci.impl.fns$fun$arity_1__3532@49259533"]}}]
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object
+ [clojure.lang.Atom 0x8c358d8
+  {:status :ready,
+   :val {:s1 3,
+         "c1" #object
+               [sci.impl.fns$fun$arity_1__3532 0x49259533
+                "sci.impl.fns$fun$arity_1__3532@49259533"]}}]
+clj꞉core꞉> 
+(create :s1)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(defn create [id]
+  (swap! counters assoc id 0)
+  nil)
+#'core/create
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc)
+  nil)
+#'core/count
+clj꞉core꞉> 
+(create :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(create :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x6c91a7ad {:status :ready, :val {:s1 3, :s2 1}}]
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (> count longest-count)
+              [id count]
+              [longest-id longest-count]))
+          0
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x6c91a7ad {:status :ready, :val {:s1 3, :s2 1}}]
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc)
+  nil)
+#'core/count
+clj꞉core꞉> 
+(defn create [id]
+  (swap! counters assoc id 0)
+  nil)
+#'core/create
+clj꞉core꞉> 
+(create :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (> count longest-count)
+              [id count]
+              [longest-id longest-count]))
+          0
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s2 3}}]
+clj꞉core꞉> 
+(create :s2)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(count :s2)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(count :s2)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(count :s2)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(create :s1)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(count :s1)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+counters
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 1, :s2 3}}]
+clj꞉core꞉> 
+(defn create [id]
+  (swap! counters assoc id 0)
+  nil)
+#'core/create
+clj꞉core꞉> 
+(create :s1)
+; java.lang.UnsupportedOperationException: nth not supported on this type: Long core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (> count longest-count)
+              [id count]
+              [longest-id longest-count]))
+          [0 nil]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [0 nil]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(create :s1)
+; java.lang.NullPointerException core /Users/callumherries/code/site/a.clj:3:17
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 0, :s2 3}}]
+clj꞉core꞉> 
+(create :s1)
+; java.lang.NullPointerException core /Users/callumherries/code/site/a.clj:3:17
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [0 nil]
+          @counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [0 nil]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(create :s2)
+; java.lang.NullPointerException core /Users/callumherries/code/site/a.clj:3:17
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(create :s2)
+; java.lang.ClassCastException: clojure.lang.PersistentVector cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:3:20
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 0, :s2 0}}]
+clj꞉core꞉> 
+(create :s2)
+; java.lang.ClassCastException: clojure.lang.PersistentVector cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:3:20
+clj꞉core꞉> 
+(remove-watch :new-longest-counter)
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/remove-watch core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(remove-watch counters :new-longest-counter)
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 0, :s2 0}}]
+clj꞉core꞉> 
+(create :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(longest-counter @counters)
+[:s2 1]
+clj꞉core꞉> 
+(create :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(longest-counter @counters)
+[:s1 2]
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(longest-counter @counters)
+[:s2 4]
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (longest-counter old-state) (longest-counter new-state))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 2, :s2 4}}]
+clj꞉core꞉> 
+(create :s2)
+; java.lang.ClassCastException: clojure.lang.PersistentVector cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:3:20
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (prn counters)
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(create :s2)
+{:s2 0, :s1 2}
+{:s2 0, :s1 2}
+; java.lang.ClassCastException: clojure.lang.PersistentVector cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:3:20
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (second (longest-counter old-state)) (second (longest-counter new-state)))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 2, :s2 0}}]
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (prn counters)
+  (first (reduce (fn [[longest-id longest-count] [id count]]
+                   (if (< longest-count count)
+                     [id count]
+                     [longest-id longest-count]))
+                 [nil 0]
+                 counters)))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (second (longest-counter old-state)) (second (longest-counter new-state)))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x4833e43b {:status :ready, :val {:s1 2, :s2 0}}]
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (prn counters)
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(create :s2)
+{:s2 0, :s1 2}
+{:s2 0, :s1 2}
+nil
+clj꞉core꞉> 
+(count :s2)
+{:s2 0, :s1 2}
+{:s2 1, :s1 2}
+nil
+clj꞉core꞉> 
+(count :s2)
+{:s2 1, :s1 2}
+{:s2 2, :s1 2}
+nil
+clj꞉core꞉> 
+(count :s2)
+{:s2 2, :s1 2}
+{:s2 3, :s1 2}
+{:s2 2, :s1 2}
+New longest counter:  [:s2 2]
+nil
+clj꞉core꞉> 
+(count :s1)
+{:s2 3, :s1 2}
+{:s2 3, :s1 3}
+nil
+clj꞉core꞉> 
+(count :s1)
+{:s2 3, :s1 3}
+{:s2 3, :s1 4}
+{:s2 3, :s1 3}
+New longest counter:  [:s2 3]
+nil
+clj꞉core꞉> 
+(count :s2)
+{:s2 3, :s1 4}
+{:s2 4, :s1 4}
+nil
+clj꞉core꞉> 
+(count :s2)
+{:s2 4, :s1 4}
+{:s2 5, :s1 4}
+{:s2 4, :s1 4}
+New longest counter:  [:s2 4]
+nil
+clj꞉core꞉> 
+(count :s1)
+{:s2 5, :s1 4}
+{:s2 5, :s1 5}
+nil
+clj꞉core꞉> 
+(count :s1)
+{:s2 5, :s1 5}
+{:s2 5, :s1 6}
+{:s2 5, :s1 5}
+New longest counter:  [:s2 5]
+nil
+clj꞉core꞉> 
+(defn create-counter [id]
+  (swap! counters assoc id 0)
+  nil)
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (do (swap! s inc) nil)
+        :value @s
+        :name name
+        :clear (reset! s 0)))))
+#'core/create-counter
+clj꞉core꞉> 
+(create-counter :s2)
+#object
+ [sci.impl.fns$fun$arity_1__3532 0x1c6cbf9
+  "sci.impl.fns$fun$arity_1__3532@1c6cbf9"]
+clj꞉core꞉> 
+(count :s1)
+{:s2 5, :s1 6}
+{:s2 5, :s1 7}
+{:s2 5, :s1 6}
+New longest counter:  [:s1 6]
+nil
+clj꞉core꞉> 
+(count :s1)
+{:s2 5, :s1 7}
+{:s2 5, :s1 8}
+{:s2 5, :s1 7}
+New longest counter:  [:s1 7]
+nil
+clj꞉core꞉> 
+(count :s1)
+{:s2 5, :s1 8}
+{:s2 5, :s1 9}
+{:s2 5, :s1 8}
+New longest counter:  [:s1 8]
+nil
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc))
+#'core/count
+clj꞉core꞉> 
+(defn create-counter [id]
+  (swap! counters assoc id 0))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn counter-controller [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add (swap! cs conj (first args))
+        :delete (swap! cs dissoc (first args))
+        :value @cs
+        :id id))))
+#'core/counter-controller
+clj꞉core꞉> 
+(defn counter-controller [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add (swap! cs conj (first args))
+        :delete (swap! cs dissoc (first args))
+        :value @cs
+        :id id))))
+#'core/counter-controller
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc))
+#'core/count
+clj꞉core꞉> 
+(defn create-counter [id]
+  (swap! counters assoc id 0))
+#'core/create-counter
+clj꞉core꞉> 
+(count :s1)
+; java.lang.NullPointerException core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(create-counter :s1)
+{:s1 0}
+clj꞉core꞉> 
+(create-counter :s2)
+{:s1 0, :s2 0}
+clj꞉core꞉> 
+(count :s1)
+{:s1 1, :s2 0}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2, :s2 0}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3, :s2 0}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 1}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 2}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 3}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 4}
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (when (< (second (longest-counter old-state)) (second (longest-counter new-state)))
+               (println "New longest counter: " (longest-counter old-state)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 3, :s2 4}}]
+clj꞉core꞉> 
+(count :s1)
+{:s1 4, :s2 4}
+clj꞉core꞉> 
+(count :s1)
+New longest counter:  [:s1 4]
+{:s1 5, :s2 4}
+clj꞉core꞉> 
+(count :s1)
+New longest counter:  [:s1 5]
+{:s1 6, :s2 4}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 6}
+clj꞉core꞉> 
+(count :s2)
+New longest counter:  [:s1 6]
+{:s1 6, :s2 7}
+clj꞉core꞉> 
+(count :s2)
+New longest counter:  [:s2 7]
+{:s1 6, :s2 8}
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [_key _ref old-state new-state]
+             (let [[old-id _] (longest-counter old-state)
+                   [new-id new-count] (longest-counter new-state)]
+               (when (not= old-id new-id)
+                 (println "New longest counter: " new-id " with count " new-count)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(defn longest-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/longest-counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom [])]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [k r o n]
+             (let [[oid _] (highest o)
+                   [nid ncount] (highest n)]
+               (when (not= oid nid)
+                 (println "New longest counter: " nid " with count " ncount)))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: highest core /Users/callumherries/code/site/a.clj:3:28
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [k r o n]
+             (let [[oid _] (highest o)
+                   [nid ncount] (highest n)]
+               (when (not= oid nid)
+                 (println "New longest counter: " nid " with count " ncount)))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: highest core /Users/callumherries/code/site/a.clj:3:28
+clj꞉core꞉> 
+(defn highest [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/highest
+clj꞉core꞉> 
+(add-watch counters :new-longest-counter
+           (fn [k r o n]
+             (let [[oid _] (highest o)
+                   [nid ncount] (highest n)]
+               (when (not= oid nid)
+                 (println "New longest counter: " nid " with count " ncount)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch counters :new-highest-counter
+           (fn [k r o n]
+             (let [[oid _] (highest o)
+                   [nid ncount] (highest n)]
+               (when (not= oid nid)
+                 (println "New longest counter: " nid " with count " ncount)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(defn highest [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/highest
+clj꞉core꞉> 
+(defn top [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/top
+clj꞉core꞉> 
+(add-watch counters :new-highest-counter
+           (fn [k r o n]
+             (let [[oid _] (top o)
+                   [nid ncount] (top n)]
+               (when (not= oid nid)
+                 (println "New top counter: " nid " with count " ncount)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(defn top-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :new-top-counter
+           (fn [k r o n]
+             (let [[oid _] (top-counter o)
+                   [nid ncount] (top-counter n)]
+               (when (not= oid nid)
+                 (println "New top counter: " nid " with count " ncount)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(defn top-counter [counters]
+  (reduce (fn [[longest-id longest-count] [id count]]
+            (if (< longest-count count)
+              [id count]
+              [longest-id longest-count]))
+          [nil 0]
+          counters))
+#'core/top-counter
+clj꞉core꞉> 
+(max-key :count @counters)
+{:s1 6, :s2 8}
+clj꞉core꞉> 
+(max-key :count (seq @counters))
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(seq @counters)
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(seq @counters)
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(seq @counters)
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(seq @counters)
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(max-key second (seq @counters))
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(max-key second (seq @counters))
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(seq @counters)
+([:s1 6] [:s2 8])
+clj꞉core꞉> 
+(apply max-key second (seq @counters))
+[:s2 8]
+clj꞉core꞉> 
+@counters
+{:s1 6, :s2 8}
+clj꞉core꞉> 
+(apply max-key second (seq @counters))
+[:s2 8]
+clj꞉core꞉> 
+(defn top-counter [counters]
+  (apply max-key second (seq counters)))
+#'core/top-counter
+clj꞉core꞉> 
+(defn top-counter [counters]
+  (apply max-key second @counters))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :new-top-counter
+           (fn [k r o n]
+             (let [[oid _] (top-counter o)
+                   [nid ncount] (top-counter n)]
+               (when (not= oid nid)
+                 (println "New top counter: " nid " with count " ncount)))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch counters :new-top-counter (fn [k r o n] (apply max-key second n)))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(def top-counter (atom nil))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :new-top-counter (fn [k r o n] (apply max-key second n)))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch counters :new-top-counter
+  (fn [_ _ _ n]
+    (apply max-key second n)))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch top-counter
+  (fn [_ _ _ [id count]]
+    (println "New top counter: " id " with count " ncount)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: ncount core /Users/callumherries/code/site/a.clj:3:5
+clj꞉core꞉> 
+(add-watch counters :new-top-counter
+  (fn [_ _ _ n]
+    (apply max-key second n)))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch top-counter
+(fn [_ _ _ [id count]]
+  (println "New top counter: " id " with count " ncount)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: ncount core /Users/callumherries/code/site/a.clj:3:3
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ n]
+    (apply max-key second n)))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ _ [id count]]
+             (println "New top counter: " id " with count " ncount)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: ncount core /Users/callumherries/code/site/a.clj:3:14
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ [old-id _] [new-id count]]
+             (when-not (= old-id new-id)
+               (println "New top counter:" new-id "with count:" count))))
+#object [clojure.lang.Atom 0x7599ba88 {:status :ready, :val nil}]
+clj꞉core꞉> 
+(def top-counter (atom nil))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ n]
+    (swap! top-counter (apply max-key second n))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ [old-id _] [new-id count]]
+             (when-not (= old-id new-id)
+               (println "New top counter:" new-id "with count:" count))))
+#object [clojure.lang.Atom 0x1df7e807 {:status :ready, :val nil}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ o n]
+    (swap! top-counter (apply max-key second n))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(def top-counter (atom nil))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ o n]
+    (swap! top-counter (apply max-key second n))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 8}}]
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ [old-id _] [new-id count]]
+             (when-not (= old-id new-id)
+               (println "New top counter:" new-id "with count:" count))))
+#object [clojure.lang.Atom 0x14f304a8 {:status :ready, :val nil}]
+clj꞉core꞉> 
+(create-counter :s2)
+#object
+ [sci.impl.fns$fun$arity_1__3532 0x3e3264bc
+  "sci.impl.fns$fun$arity_1__3532@3e3264bc"]
+clj꞉core꞉> 
+(count :s2)
+; java.lang.IllegalArgumentException: Key must be integer core /Users/callumherries/code/site/a.clj:3:5
+clj꞉core꞉> 
+(def top-counter (atom nil))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ [old-id _] [new-id count]]
+             (when-not (= old-id new-id)
+               (println "New top counter:" new-id "with count:" count))))
+#object [clojure.lang.Atom 0x7f6e354 {:status :ready, :val nil}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ n]
+    (swap! top-counter (apply max-key second n))))
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 9}}]
+clj꞉core꞉> 
+(create-counter :s2)
+#object
+ [sci.impl.fns$fun$arity_1__3532 0x43689d2d
+  "sci.impl.fns$fun$arity_1__3532@43689d2d"]
+clj꞉core꞉> 
+(count :s2)
+; java.lang.IllegalArgumentException: Key must be integer core /Users/callumherries/code/site/a.clj:3:5
+clj꞉core꞉> 
+(remove-watch counters :top-counter)
+#object [clojure.lang.Atom 0x14b1402e {:status :ready, :val {:s1 6, :s2 10}}]
+clj꞉core꞉> 
+; Jacking in...
+; nREPL Connection was closed
+; Starting Jack-in Terminal: bb --nrepl-server 59280
+; Hooking up nREPL sessions...
+; Connected session: clj
+; TIPS:
+;   - You can edit the contents here. Use it as a REPL if you like.
+;   - `alt+enter` evaluates the current top level form.
+;   - `ctrl+enter` evaluates the current form.
+;   - `alt+up` and `alt+down` traverse up and down the REPL command history
+;      when the cursor is after the last contents at the prompt
+;   - Clojure lines in stack traces are peekable and clickable.
+clj꞉user꞉> 
+; Jack-in done.
+clj꞉user꞉> 
+(ns core)
+nil
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc))
+#'core/count
+clj꞉core꞉> 
+(defn create-counter [id]
+  (swap! counters assoc id 0))
+#'core/create-counter
+clj꞉core꞉> 
+(create-counter :s1)
+{:s1 0}
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(def top-counter (atom nil))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ n]
+    (swap! top-counter (apply max-key second n))))
+#object [clojure.lang.Atom 0x4bb27ebe {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(count :s1)
+; java.lang.IllegalArgumentException: Key must be integer core /Users/callumherries/code/site/a.clj:3:5
+clj꞉core꞉> 
+counters
+#object [clojure.lang.Atom 0x4bb27ebe {:status :ready, :val {:s1 3}}]
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 3]
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 3]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ cs]
+    (swap! top-counter (apply max-key second cs))))
+#object [clojure.lang.Atom 0x4bb27ebe {:status :ready, :val {:s1 3}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ cs]
+    (reset! top-counter (apply max-key second cs))))
+#object [clojure.lang.Atom 0x4bb27ebe {:status :ready, :val {:s1 3}}]
+clj꞉core꞉> 
+(count :s2)
+; java.lang.NullPointerException core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 3]
+clj꞉core꞉> 
+(reset! top-counter (apply max-key second @counters))
+[:s1 3]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ cs]
+    (reset! top-counter (apply max-key second cs))))
+#object [clojure.lang.Atom 0x4bb27ebe {:status :ready, :val {:s1 3}}]
+clj꞉core꞉> 
+(count :s2)
+; java.lang.NullPointerException core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(defn create-counter [id]
+  (swap! counters assoc id 0))
+#'core/create-counter
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc))
+#'core/count
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(create-counter :s2)
+{:s2 0}
+clj꞉core꞉> 
+(count :s2)
+{:s2 1}
+clj꞉core꞉> 
+(count :s2)
+{:s2 2}
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1, :s2 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2, :s2 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3, :s2 2}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 3}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 4}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+{:s1 3, :s2 6}
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ cs]
+    (reset! top-counter (apply max-key second cs))))
+#object [clojure.lang.Atom 0x3eba9320 {:status :ready, :val {:s1 3, :s2 6}}]
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+1
+clj꞉core꞉> 
+(c :count)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn counter [id]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)]
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(c :value)
+0
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(def c (counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+1
+clj꞉core꞉> 
+(c :count)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _  n]
+    (swap! top-counter (apply max-key second n))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9}}]
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ [old-id _] [new-id count]]
+             (when-not (= old-id new-id)
+               (println "New top counter:" new-id "with count:" count))))
+#object [clojure.lang.Atom 0xe103ce {:status :ready, :val [:s1 3]}]
+clj꞉core꞉> 
+(create-counter :s2)
+#object
+ [sci.impl.fns$fun$arity_1__3532 0xc18d21a
+  "sci.impl.fns$fun$arity_1__3532@c18d21a"]
+clj꞉core꞉> 
+(count :s2)
+; clojure.lang.ArityException: Wrong number of args (4) passed to: sci.impl.fns/fun/arity-3--3548 core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _  cs]
+    (swap! top-counter (apply max-key second cs))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9, :s2 1}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _  counters]
+    (swap! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9, :s2 1}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _  counters]
+    (swap! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9, :s2 1}}]
+clj꞉core꞉> 
+(defn top-counter [counters]
+  (apply max-key second counters))
+#'core/top-counter
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _  counters]
+    (swap! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9, :s2 1}}]
+clj꞉core꞉> 
+(create-counter :s2)
+#object
+ [sci.impl.fns$fun$arity_1__3532 0x22a4fee0
+  "sci.impl.fns$fun$arity_1__3532@22a4fee0"]
+clj꞉core꞉> 
+(count :s2)
+; clojure.lang.ArityException: Wrong number of args (4) passed to: sci.impl.fns/fun/arity-3--3548 core /Users/callumherries/code/site/a.clj:2:3
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (swap! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9, :s2 2}}]
+clj꞉core꞉> 
+(create-counter :s2)
+#object
+ [sci.impl.fns$fun$arity_1__3532 0x36136c69
+  "sci.impl.fns$fun$arity_1__3532@36136c69"]
+clj꞉core꞉> 
+(count :s2)
+; java.lang.ClassCastException: sci.impl.fns$fun$arity_1__3532 cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:3:5
+clj꞉core꞉> 
+(def top-counter (atom nil))
+#'core/top-counter
+clj꞉core꞉> 
+(count :s2)
+; java.lang.IllegalArgumentException: Key must be integer core /Users/callumherries/code/site/a.clj:3:5
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (reset! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x520cca4a {:status :ready, :val {:s1 9, :s2 4}}]
+clj꞉core꞉> 
+(count :s2)
+{:s1 9, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+{:s1 9, :s2 6}
+clj꞉core꞉> 
+(count :s2)
+{:s1 9, :s2 7}
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id inc) nil)
+#'core/count
+clj꞉core꞉> 
+(defn create-counter [id]
+  (swap! counters assoc id 0) nil)
+#'core/create-counter
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id] (swap! counters update id inc) nil)
+#'core/count
+clj꞉core꞉> 
+(defn create-counter [id] (swap! counters assoc id 0) nil)
+#'core/create-counter
+clj꞉core꞉> 
+(create-counter :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(create-counter :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (reset! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x445b6ed7 {:status :ready, :val {:s1 4, :s2 4}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (reset! top-counter (apply max-key second counters))))
+#object [clojure.lang.Atom 0x445b6ed7 {:status :ready, :val {:s1 4, :s2 4}}]
+clj꞉core꞉> 
+(add-watch top-counter :print-new-top-counter
+           (fn [_ _ [old-id _] [new-id count]]
+             (when-not (= old-id new-id)
+               (println "New top counter:" new-id "with count:" count))))
+#object [clojure.lang.Atom 0x566a5b5c {:status :ready, :val [:s1 9]}]
+clj꞉core꞉> 
+(count :s2)
+New top counter: :s2 with count: 5
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s1)
+New top counter: :s1 with count: 8
+nil
+clj꞉core꞉> 
+(count :s1)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+New top counter: :s2 with count: 9
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(count :s2)
+nil
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (second args) (third args)))))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: third core /Users/callumherries/code/site/a.clj:8:57
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (second args) (third args)))))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: third core /Users/callumherries/code/site/a.clj:8:57
+clj꞉core꞉> 
+(add-watch counters :top-counter
+           (fn [_ _ _ counters]
+             (let [top-counter (apply max-key second counters)]
+               (when (< 10 top-counter)
+                 (reset! top-counter 0)))))
+#object [clojure.lang.Atom 0x445b6ed7 {:status :ready, :val {:s1 9, :s2 13}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [top-counter (apply max-key second counters)]
+      (when (< 10 top-counter)
+        (reset! top-counter 0)))))
+#object [clojure.lang.Atom 0x445b6ed7 {:status :ready, :val {:s1 9, :s2 13}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [top-counter (apply max-key second counters)]
+      (when (< 10 top-counter)
+        (println "Done counting, top counter:" top-counter)
+        (reset! top-counter 0)))))
+#object [clojure.lang.Atom 0x445b6ed7 {:status :ready, :val {:s1 9, :s2 13}}]
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 1}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 2}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 3}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 4}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 6}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 7}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 8}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 9}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 10}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 11}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 12}
+clj꞉core꞉> 
+(count :s2)
+{:s1 6, :s2 13}
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [top-counter (apply max-key second counters)]
+      (when (< 10 top-counter)
+        (println "Done counting, top counter:" top-counter)
+        (reset! top-counter 0)))))
+#object [clojure.lang.Atom 0x3af543a2 {:status :ready, :val {:s1 6, :s2 13}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [top-counter (apply max-key second counters)]
+      (when (< 10 top-counter)
+        (println "Done counting, top counter:" top-counter)
+        (reset! top-counter 0)))))
+#object [clojure.lang.Atom 0x3af543a2 {:status :ready, :val {:s1 6, :s2 13}}]
+clj꞉core꞉> 
+(count :s2)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s2)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s2)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s2)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s2)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 1}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 2}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 3}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 4}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 6}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 7}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 8}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 9}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 10}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 11}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 12}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 13}
+clj꞉core꞉> 
+(count :s2)
+{:s1 4, :s2 14}
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [top-counter (apply max-key second counters)]
+      (when (< 10 top-counter)
+        (println "Done counting, top counter:" top-counter)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x340d5874 {:status :ready, :val {:s1 4, :s2 14}}]
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.MapEntry cannot be cast to java.lang.Number core /Users/callumherries/code/site/a.clj:4:13
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+{:s1 12}
+clj꞉core꞉> 
+(count :s1)
+{:s1 13}
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [top-counter (apply max-key second counters)]
+      (when (< 10 (second top-counter))
+        (println "Done counting, top counter:" top-counter)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x5e2e62a {:status :ready, :val {:s1 13}}]
+clj꞉core꞉> 
+(add-watch counters :top-counter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second counters)]
+      (when (< 10 count)
+        (println "Done counting, top counter:" top-counter)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x5e2e62a {:status :ready, :val {:s1 13}}]
+clj꞉core꞉> 
+(add-watch counters :watch-counters
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second counters)]
+      (when (< 10 count)
+        (println "Done counting, top counter:" top-counter)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x5e2e62a {:status :ready, :val {:s1 13}}]
+clj꞉core꞉> 
+(count :s1)
+Done counting, top counter: #object[clojure.lang.Atom 0x566a5b5c {:status :ready, :val [:s2 13]}]
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:6:9
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second counters)]
+      (when (< 10 count)
+        (println "Done counting, top counter:" top-counter)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x5e2e62a {:status :ready, :val {:s1 14}}]
+clj꞉core꞉> 
+(count :s1)
+Done counting, top counter: #object[clojure.lang.Atom 0x566a5b5c {:status :ready, :val [:s2 13]}]
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:6:9
+clj꞉core꞉> 
+(apply max-key second counters)
+; java.lang.IllegalArgumentException: Don't know how to create ISeq from: clojure.lang.Atom core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 15]
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 15]
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 15]
+clj꞉core꞉> 
+(apply max-key second @counters)
+[:s1 15]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second @counters)]
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x5e2e62a {:status :ready, :val {:s1 15}}]
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+{:s1 11}
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second @counters)]
+      (prinln count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: prinln core /Users/callumherries/code/site/a.clj:4:7
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second @counters)]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x444c557b {:status :ready, :val {:s1 11}}]
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(count :s1)
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to java.util.concurrent.Future core /Users/callumherries/code/site/a.clj:3:44
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+{:s1 12}
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second (seq @counters))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0xd40a4b8 {:status :ready, :val {:s1 12}}]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second (seq counters))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0xd40a4b8 {:status :ready, :val {:s1 12}}]
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+{:s1 12}
+clj꞉core꞉> 
+(count :s1)
+{:s1 13}
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ counters]
+    (let [[id count] (apply max-key second (seq counters))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {:s1 13}}]
+clj꞉core꞉> 
+(count :s1)
+14
+Done counting, top counter: :s1
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:7:9
+clj꞉core꞉> 
+(count :s1)
+15
+Done counting, top counter: :s1
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:7:9
+clj꞉core꞉> 
+(count :s1)
+16
+Done counting, top counter: :s1
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:7:9
+clj꞉core꞉> 
+(count :s1)
+17
+Done counting, top counter: :s1
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:7:9
+clj꞉core꞉> 
+(count :s1)
+18
+Done counting, top counter: :s1
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:7:9
+clj꞉core꞉> 
+(count :s1)
+19
+Done counting, top counter: :s1
+; java.lang.ClassCastException: clojure.lang.PersistentArrayMap cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:7:9
+clj꞉core꞉> 
+counters
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {:s1 19}}]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ ref _ counters]
+    (let [[id count] (apply max-key second (seq counters))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! ref {})))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {:s1 19}}]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ ref _ counters]
+    (let [[id count] (apply max-key second (seq counters))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! ref {})))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {:s1 19}}]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (let [[id count] (apply max-key second (seq cs))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! ref {})))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {:s1 19}}]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (let [[id count] (apply max-key second (seq cs))]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {:s1 19}}]
+clj꞉core꞉> 
+(count :s1)
+20
+Done counting, top counter: :s1
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:3:22
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+11
+Done counting, top counter: :s1
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:3:22
+clj꞉core꞉> 
+(seq nil)
+nil
+clj꞉core꞉> 
+(seq {})
+nil
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (when-let [cs (seq cs)]
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (< 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {}}]
+clj꞉core꞉> 
+(apply max-key second {:a 1})
+[:a 1]
+clj꞉core꞉> 
+(apply max-key second {:a 1 :b 2})
+[:b 2]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (let [[id count] (apply max-key second cs)]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x4aeee068 {:status :ready, :val {}}]
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+{:s1 12}
+clj꞉core꞉> 
+(apply max-key second {:a 1 :b 2})
+[:b 2]
+clj꞉core꞉> 
+(apply max-key second {:a 3 :b 2})
+[:a 3]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (let [[id count] (apply max-key second cs)]
+      (println count)
+      (when (< 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! counters {})))))
+#object [clojure.lang.Atom 0x4380ff6b {:status :ready, :val {:s1 12}}]
+clj꞉core꞉> 
+(count :s1)
+13
+Done counting, top counter: :s1
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:3:22
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+11
+Done counting, top counter: :s1
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:3:22
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(apply max-key second {})
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(apply max-key second {})
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(apply max-key second {})
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(apply max-key second {})
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(apply max-key second {})
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (< 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x4380ff6b {:status :ready, :val {:s1 3}}]
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (< 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x4380ff6b {:status :ready, :val {:s1 3}}]
+clj꞉core꞉> 
+(apply max-key second {})
+; clojure.lang.ArityException: Wrong number of args (1) passed to: clojure.core/max-key core /Users/callumherries/code/site/a.clj:1:1
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+11
+Done counting, top counter: :s1
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+11
+Done counting, top counter: :s1
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+{:s1 10}
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x4380ff6b {:status :ready, :val {:s1 10}}]
+clj꞉core꞉> 
+(count :s1)
+11
+Done counting, top counter: :s1
+{:s1 11}
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+Done counting, top counter: :s1
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+{:s1 9}
+clj꞉core꞉> 
+(defn count [id] (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {}}]
+clj꞉core꞉> 
+(count :s2)
+1
+{:s2 1}
+clj꞉core꞉> 
+(add-watch counters :resetter
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s2 1}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s2 1}}]
+clj꞉core꞉> 
+(count :s1)
+1
+1
+{:s1 1, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+2
+2
+{:s1 2, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+3
+3
+{:s1 3, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+4
+4
+{:s1 4, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+5
+5
+{:s1 5, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+6
+6
+{:s1 6, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+7
+7
+{:s1 7, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+8
+8
+{:s1 8, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 9, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+10
+Done counting, top counter: :s1
+10
+Done counting, top counter: :s1
+{:s1 10, :s2 1}
+clj꞉core꞉> 
+(count :s1)
+1
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s2)
+3
+3
+{:s1 3, :s2 1}
+clj꞉core꞉> 
+(count :s2)
+3
+3
+{:s1 3, :s2 2}
+clj꞉core꞉> 
+(count :s2)
+3
+3
+{:s1 3, :s2 3}
+clj꞉core꞉> 
+(count :s2)
+4
+4
+{:s1 3, :s2 4}
+clj꞉core꞉> 
+(count :s2)
+5
+5
+{:s1 3, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+6
+6
+{:s1 3, :s2 6}
+clj꞉core꞉> 
+(count :s2)
+7
+7
+{:s1 3, :s2 7}
+clj꞉core꞉> 
+(count :s2)
+8
+8
+{:s1 3, :s2 8}
+clj꞉core꞉> 
+(count :s2)
+9
+9
+{:s1 3, :s2 9}
+clj꞉core꞉> 
+(defn count [id] (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 4, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 5, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 6, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 7, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 8, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 9, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+10
+Done counting, top counter: :s1
+10
+Done counting, top counter: :s1
+{:s1 10, :s2 9}
+clj꞉core꞉> 
+(count :s1)
+1
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+2
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+3
+3
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+4
+4
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+5
+5
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+6
+6
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+7
+7
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+8
+8
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+9
+9
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+10
+Done counting, top counter: :s1
+10
+Done counting, top counter: :s1
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+1
+1
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+2
+2
+{:s1 2}
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (seq cs)
+      (let [[id count] (apply max-key second cs)]
+        (println count)
+        (when (<= 10 count)
+          (println "Done counting, top counter:" id)
+          (reset! counters {}))))))
+#object [clojure.lang.Atom 0x47f2e023 {:status :ready, :val {:s1 2}}]
+clj꞉core꞉> 
+(count :s2)
+2
+2
+{:s1 2, :s2 1}
+clj꞉core꞉> 
+(count :s2)
+2
+2
+{:s1 2, :s2 2}
+clj꞉core꞉> 
+(count :s2)
+3
+3
+{:s1 2, :s2 3}
+clj꞉core꞉> 
+(count :s2)
+4
+4
+{:s1 2, :s2 4}
+clj꞉core꞉> 
+(count :s2)
+5
+5
+{:s1 2, :s2 5}
+clj꞉core꞉> 
+(count :s2)
+6
+6
+{:s1 2, :s2 6}
+clj꞉core꞉> 
+(count :s2)
+7
+7
+{:s1 2, :s2 7}
+clj꞉core꞉> 
+(count :s2)
+8
+8
+{:s1 2, :s2 8}
+clj꞉core꞉> 
+(count :s2)
+9
+9
+{:s1 2, :s2 9}
+clj꞉core꞉> 
+(count :s2)
+10
+Done counting, top counter: :s2
+10
+Done counting, top counter: :s2
+{:s1 2, :s2 10}
+clj꞉core꞉> 
+(count :s2)
+1
+1
+{:s2 1}
+clj꞉core꞉> 
+(count :s2)
+2
+2
+{:s2 2}
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom [])]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/counter-observer
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(swap! counters assoc (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause: :name core /Users/callumherries/code/site/a.clj:1:23
+clj꞉core꞉> 
+(swap! counters assoc (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause: :name core /Users/callumherries/code/site/a.clj:1:23
+clj꞉core꞉> 
+(swap! counters assoc (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause: :name core /Users/callumherries/code/site/a.clj:1:23
+clj꞉core꞉> 
+(swap! counters assoc (c :name) c)
+; java.lang.IllegalArgumentException: No matching clause: :name core /Users/callumherries/code/site/a.clj:1:23
+clj꞉core꞉> 
+(c :count)
+1
+clj꞉core꞉> 
+(c :count)
+2
+clj꞉core꞉> 
+(c :count)
+3
+clj꞉core꞉> 
+(c :count)
+4
+clj꞉core꞉> 
+(c :count)
+5
+clj꞉core꞉> 
+(c :count)
+6
+clj꞉core꞉> 
+(c :count)
+7
+clj꞉core꞉> 
+(c :count)
+8
+clj꞉core꞉> 
+(c :count)
+9
+clj꞉core꞉> 
+(c :count)
+10
+clj꞉core꞉> 
+(c :count)
+11
+clj꞉core꞉> 
+(c :count)
+12
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom [])]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg & args]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/counter-observer
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+1
+clj꞉core꞉> 
+(c :count)
+2
+clj꞉core꞉> 
+(c :count)
+3
+clj꞉core꞉> 
+(c :count)
+4
+clj꞉core꞉> 
+(c :add-observer "c1")
+["c1"]
+clj꞉core꞉> 
+(c :add-observer "c1")
+["c1" "c1"]
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom {})]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg & args]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg & args]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/counter-observer
+clj꞉core꞉> 
+(conj #{} 1)
+#{1}
+clj꞉core꞉> 
+(c :add-observer "c1")
+["c1" "c1" "c1"]
+clj꞉core꞉> 
+(c :add-observer "c1")
+["c1" "c1" "c1" "c1"]
+clj꞉core꞉> 
+(c :add-observer "c1")
+["c1" "c1" "c1" "c1" "c1"]
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+1
+clj꞉core꞉> 
+(c :count)
+2
+clj꞉core꞉> 
+(c :count)
+3
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/counter-observer
+clj꞉core꞉> 
+(def c (create-counter-observer "o1"))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: create-counter-observer core /Users/callumherries/code/site/a.clj:1:8
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: create-counter-observer core /Users/callumherries/code/site/a.clj:1:8
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: create-counter-observer core /Users/callumherries/code/site/a.clj:1:8
+clj꞉core꞉> 
+(defn counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/counter-observer
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x4450a19e
+    "sci.impl.fns$fun$arity_1__3029@4450a19e"]}
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg & args]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :remove-observer (swap! observers disj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (add-watch s :on-change
+               (fn [_key _ref old-state new-state]
+                 (doseq [o @observers]
+                   (o :has-changed id new-state old-state))))
+    (fn [msg & args]
+      (case msg
+        :count (swap! s inc)
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :has-changed id new-state old-state)))
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: new-state core /Users/callumherries/code/site/a.clj:8:22
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :has-changed id @s)))
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed (doseq [c @cs]
+                       (c :has-changed id (first args) (second args)))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :count)
+; java.lang.ClassCastException: java.lang.String cannot be cast to clojure.lang.IFn core /Users/callumherries/code/site/a.clj:8:22
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :add-observer (swap! cs conj (first args))
+        :drop-observer (swap! cs dissoc (first args))
+        :has-changed   (doseq [c @cs]
+                         (println "has changed"))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :count)
+; java.lang.ClassCastException: java.lang.String cannot be cast to clojure.lang.IFn core /Users/callumherries/code/site/a.clj:8:22
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :has-changed (doseq [c @cs]
+                       (println "has changed"))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :count)
+; java.lang.ClassCastException: java.lang.String cannot be cast to clojure.lang.IFn core /Users/callumherries/code/site/a.clj:8:22
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :has-changed id @s)))
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :has-changed (println "hey")#_(doseq [c @cs]
+                       (println "has changed"))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer "c1")
+#{"c1"}
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x77a49707
+    "sci.impl.fns$fun$arity_1__3029@77a49707"] "c1"}
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x77a49707
+    "sci.impl.fns$fun$arity_1__3029@77a49707"]}
+clj꞉core꞉> 
+(c :count)
+hey
+nil
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :has-changed (doseq [c @cs]
+                       (println "has changed"))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(c :count)
+hey
+nil
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x77a49707
+    "sci.impl.fns$fun$arity_1__3029@77a49707"]}
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x4b9d2c3e
+    "sci.impl.fns$fun$arity_1__3029@4b9d2c3e"]}
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x4b9d2c3e
+    "sci.impl.fns$fun$arity_1__3029@4b9d2c3e"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(c :value)
+2
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [cs (atom [])]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :has-changed (println "has changed" args)))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x4b9d2c3e
+    "sci.impl.fns$fun$arity_1__3029@4b9d2c3e"]}
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x4b9d2c3e
+    "sci.impl.fns$fun$arity_1__3029@4b9d2c3e"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :add-observer o)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x652bf94
+    "sci.impl.fns$fun$arity_1__3029@652bf94"]}
+clj꞉core꞉> 
+(c :count)
+has changed (c1 2)
+nil
+clj꞉core꞉> 
+(c :count)
+has changed (c1 3)
+nil
+clj꞉core꞉> 
+(c :count)
+has changed (c1 4)
+nil
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [top-counter (atom nil)]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :has-changed (println "has changed" args)))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [top-counter (atom nil)]
+    (fn [msg & args]
+      (case msg
+        :id id
+        :has-changed (do
+                       (if (= id (first args))
+                         (reset! top-counter (second args)))
+                       (println "has changed" args))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+has changed (c1 5)
+nil
+clj꞉core꞉> 
+(c :count)
+has changed (c1 6)
+nil
+clj꞉core꞉> 
+(c :count)
+has changed (c1 7)
+nil
+clj꞉core꞉> 
+(c :count)
+has changed (c1 8)
+nil
+clj꞉core꞉> 
+(c :count)
+has changed (c1 9)
+nil
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (some #(<= 10 %) (vals cs))
+      (println "Done counting, top counter:" id)
+      (reset! counters {}))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: id core /Users/callumherries/code/site/a.clj:4:7
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+{:s1 10}
+clj꞉core꞉> 
+(count :s1)
+{:s1 11}
+clj꞉core꞉> 
+(vals @counters)
+(11)
+clj꞉core꞉> 
+(some #(<= 10 %) (vals @counters))
+true
+clj꞉core꞉> 
+(some #(<= 10 %) (vals @counters))
+true
+clj꞉core꞉> 
+(some #(<= 10 %) (vals @counters))
+true
+clj꞉core꞉> 
+(some #(<= 10 %) (vals @counters))
+true
+clj꞉core꞉> 
+(some #(<= 10 %) (vals @counters))
+true
+clj꞉core꞉> 
+(some #(<= 10 %) (vals @counters))
+true
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when (some #(<= 10 %) (vals cs))
+      (println "Done counting, top counter:" id)
+      (reset! counters {}))))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: id core /Users/callumherries/code/site/a.clj:4:7
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when-let [top-counter-id (some (fn [[k v]] (when (<= 10 v) k)) cs)]
+      (println "Done counting, top counter:" top-counter-id)
+      (reset! counters {}))))
+#object [clojure.lang.Atom 0x15fdbc90 {:status :ready, :val {:s1 11}}]
+clj꞉core꞉> 
+(count :s1)
+Done counting, top counter: :s1
+{:s1 12}
+clj꞉core꞉> 
+(count :s1)
+{:s1 1}
+clj꞉core꞉> 
+(count :s1)
+{:s1 2}
+clj꞉core꞉> 
+(count :s1)
+{:s1 3}
+clj꞉core꞉> 
+(count :s1)
+{:s1 4}
+clj꞉core꞉> 
+(count :s1)
+{:s1 5}
+clj꞉core꞉> 
+(count :s1)
+{:s1 6}
+clj꞉core꞉> 
+(count :s1)
+{:s1 7}
+clj꞉core꞉> 
+(count :s1)
+{:s1 8}
+clj꞉core꞉> 
+(count :s1)
+{:s1 9}
+clj꞉core꞉> 
+(count :s1)
+Done counting, top counter: :s1
+{:s1 10}
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (do (swap! counters conj c)
+                               (c :add-observer self)))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" id)
+                         (reset! @counters {})))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(defn game-over [cs]
+  (when (seq cs)
+    (let [[id count] (apply max-key second cs)]
+      (println count)
+      (when (<= 10 count)
+        (println "Done counting, top counter:" id)
+        (reset! @counters {})))))
+#'core/game-over
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (do (swap! counters conj c)
+                               (c :add-observer self)))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (reset! @counters {})))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(o :observe-counter c)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x3d541fde
+    "sci.impl.fns$fun$arity_1__3029@3d541fde"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.ClassCastException: clojure.lang.PersistentHashSet cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:12:26
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.ClassCastException: clojure.lang.PersistentHashSet cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:12:26
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.ClassCastException: clojure.lang.PersistentHashSet cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:12:26
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (do (swap! counters conj c)
+                               (c :add-observer self)))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (doseq [c @counters]
+                           (reset! c {}))))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (do (swap! counters conj c)
+                               (c :add-observer self)))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (doseq [c @counters]
+                           (reset! c {}))))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (do (swap! counters conj c)
+                               (c :add-observer self)))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (doseq [c @counters]
+                           (reset! c {}))))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(o :observe-counter c)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x1e0747f2
+    "sci.impl.fns$fun$arity_1__3029@1e0747f2"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.ClassCastException: sci.impl.fns$fun$arity_1__3029 cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:13:28
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.ClassCastException: sci.impl.fns$fun$arity_1__3029 cannot be cast to clojure.lang.IAtom core /Users/callumherries/code/site/a.clj:13:28
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (do (swap! counters conj c)
+                               (c :add-observer self)))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(o :observe-counter c)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x55d55793
+    "sci.impl.fns$fun$arity_1__3029@55d55793"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.IllegalArgumentException: No matching clause: :reset core /Users/callumherries/code/site/a.clj:13:28
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.IllegalArgumentException: No matching clause: :reset core /Users/callumherries/code/site/a.clj:13:28
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+; java.lang.IllegalArgumentException: No matching clause: :reset core /Users/callumherries/code/site/a.clj:13:28
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :has-changed id @s)))
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :reset (reset! s 0)
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(def c (create-counter "c1"))
+#'core/c
+clj꞉core꞉> 
+(def o (create-counter-observer "o1"))
+#'core/o
+clj꞉core꞉> 
+(o :observe-counter c)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x6e7e8c46
+    "sci.impl.fns$fun$arity_1__3029@6e7e8c46"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+Done counting, top counter: c1
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(def o (create-counter-observer :o1))
+#'core/o
+clj꞉core꞉> 
+(def c1 (create-counter :c1))
+#'core/c1
+clj꞉core꞉> 
+(def o1 (create-counter-observer :o1))
+#'core/o1
+clj꞉core꞉> 
+(o :observe-counter c)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x44d99a1d
+    "sci.impl.fns$fun$arity_1__3029@44d99a1d"]
+  #object
+   [sci.impl.fns$fun$arity_1__3029 0x6e7e8c46
+    "sci.impl.fns$fun$arity_1__3029@6e7e8c46"]}
+clj꞉core꞉> 
+(o :observe-counter c1)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x44d99a1d
+    "sci.impl.fns$fun$arity_1__3029@44d99a1d"]}
+clj꞉core꞉> 
+(def c1 (create-counter :c1))
+#'core/c1
+clj꞉core꞉> 
+(def c2 (create-counter :c2))
+#'core/c2
+clj꞉core꞉> 
+(def o (create-counter-observer :o))
+#'core/o
+clj꞉core꞉> 
+(o :observe-counter c1)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x13c086bd
+    "sci.impl.fns$fun$arity_1__3029@13c086bd"]}
+clj꞉core꞉> 
+(o :observe-counter c2)
+#{#object
+   [sci.impl.fns$fun$arity_1__3029 0x13c086bd
+    "sci.impl.fns$fun$arity_1__3029@13c086bd"]}
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+Done counting, top counter: :c1
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(c1 :count)
+nil
+clj꞉core꞉> 
+(def counters (atom {}))
+#'core/counters
+clj꞉core꞉> 
+(defn count [id] (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+#'core/count
+clj꞉core꞉> 
+(count :c1)
+{:c1 1}
+clj꞉core꞉> 
+(count :c1)
+{:c1 2}
+clj꞉core꞉> 
+(count :c1)
+{:c1 3}
+clj꞉core꞉> 
+(count :c1)
+{:c1 4}
+clj꞉core꞉> 
+(count :c1)
+{:c1 5}
+clj꞉core꞉> 
+(count :c1)
+{:c1 6}
+clj꞉core꞉> 
+(count :c1)
+{:c1 7}
+clj꞉core꞉> 
+(count :c1)
+{:c1 8}
+clj꞉core꞉> 
+(count :c1)
+{:c1 9}
+clj꞉core꞉> 
+(count :c1)
+{:c1 10}
+clj꞉core꞉> 
+(count :c1)
+{:c1 11}
+clj꞉core꞉> 
+(count :c1)
+{:c1 12}
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when-let [top-counter-id (some (fn [[k v]] (when (<= 10 v) k)) cs)]
+      (println "Done counting, top counter:" top-counter-id)
+      (reset! counters {}))))
+#object [clojure.lang.Atom 0x4ec14be7 {:status :ready, :val {:c1 12}}]
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(defn create-counter-observer [id]
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :id id
+        :observe-counter (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :has-changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting, top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'core/create-counter-observer
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :has-changed id @s)))
+        :value @s
+        :add-observer (swap! observers conj (first args))
+        :reset (reset! s 0)
+        :id id))))
+#'core/create-counter
+clj꞉core꞉> 
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when-let [top-counter-id (some (fn [[k v]] (when (<= 10 v) k)) cs)]
+      (println "Done counting, top counter:" top-counter-id)
+      (reset! counters {}))))
+#object [clojure.lang.Atom 0x4ec14be7 {:status :ready, :val {:c1 12}}]
+clj꞉core꞉> 
+(count :c1)
+Done counting, top counter: :c1
+{:c1 13}
+clj꞉core꞉> 
+(count :c1)
+{:c1 1}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 1}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 2}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 3}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 4}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 5}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 6}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 7}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 8}
+clj꞉core꞉> 
+(count :c2)
+{:c1 1, :c2 9}
+clj꞉core꞉> 
+(count :c2)
+Done counting, top counter: :c2
+{:c1 1, :c2 10}
+clj꞉core꞉> 
+(count :c2)
+{:c2 1}
+clj꞉core꞉> 
+(count :c2)
+{:c2 2}
+clj꞉core꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'user/create-counter-observer
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'user/create-counter-observer
+clj꞉user꞉> 
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'user/create-counter-observer
+clj꞉user꞉> 
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'user/create-counter-observer
+clj꞉user꞉> 
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'user/create-counter-observer
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s))))))
+        :add-observer (swap! observers conj (first args)))
+; clojure.lang.ExceptionInfo: Could not resolve symbol: observers user /Users/callumherries/code/site/a.txt:13:23
+clj꞉user꞉> 
+(defn create-counter [id]
+  (let [s (atom 0)
+        observers (atom #{})]
+    (fn [msg & args]
+      (case msg
+        :count (do (swap! s inc)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :value @s
+        :reset (do (reset! s 0)
+                   (doseq [o @observers]
+                     (o :changed id @s)))
+        :add-observer (swap! observers conj (first args))))))
+#'user/create-counter
+clj꞉user꞉> 
+(defn create-counter-observer []
+  (let [counters (atom #{})]
+    (fn self [msg & args]
+      (case msg
+        :sub (let [[c] args]
+                           (swap! counters conj c)
+                           (c :add-observer self))
+        :changed (let [[cid count] args]
+                       (when (<= 10 count)
+                         (println "Done counting! top counter:" cid)
+                         (doseq [c @counters]
+                           (c :reset))))))))
+#'user/create-counter-observer
+clj꞉user꞉> 
+; nREPL Connection was closed

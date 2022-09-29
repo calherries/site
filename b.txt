@@ -1,0 +1,183 @@
+
+
+
+
+
+;; 2. solution without lexical scope
+;;    maintaining global invariants is easy when state is global
+
+;; 10 LOC, 2 vars
+
+(def counters (atom {}))
+
+(defn count [id]
+  (swap! counters update id (fnil inc 0)))
+
+(add-watch counters :game-over
+  (fn [_ _ _ cs]
+    (when-let [top-counter-id (some (fn [[k v]] (when (<= 10 v) k)) cs)]
+      (println "Done counting! Top counter:" top-counter-id)
+      (reset! counters {}))))
+
+;; Usage example
+;; (count :c1)
+;; (count :c1)
+;; (count :c2)
+;; (count :c2)
+;; ... etc
+;; Done counting! Top counter: :c1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

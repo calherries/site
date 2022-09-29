@@ -39,10 +39,10 @@
     [:div {:class "mb-5"}
      [:b "About me"]
      [:ul
-      [:li "I know very little about anything (but I'm working on it)."]
+      [:li "I know very little about anything (I'm working on it)."]
       [:li "I spend most of my time typing out data in the form of characters."]
       [:li "Occasionally my data solves interesting problems."]
-      [:li "But most of the time, my data solves problems caused by other data, usually written by me."]]]
+      [:li "But most of the time, it just solves problems caused by other data, usually written by me."]]]
     [:div {:class "mb-5"}
      [:b "Projects"]
      [:ul
