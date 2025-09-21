@@ -39,10 +39,9 @@
     [:div {:class "mb-5"}
      [:b "About me"]
      [:ul
-      [:li "I know very little about anything (I'm working on it)."]
-      [:li "I spend most of my time typing out data in the form of characters."]
-      [:li "Occasionally the data I type solves interesting problems."]
-      [:li "But most of the time, it just solves problems caused by other data, usually written by me."]]]
+      [:li "I'm a software engineer specializing in building robust, scalable applications."]
+      [:li "I help businesses solve complex technical challenges through custom software solutions."]
+      [:li "My expertise spans full-stack development with professional experience in C, Clojure, JavaScript, and Python."]]]
     [:div {:class "mb-5"}
      [:b "Projects"]
      [:ul
@@ -69,7 +68,12 @@
      [:b "Elsewhere"]
      [:ul
       [:li [:a {:href "https://github.com/calherries"} "Github"]]
-      [:li [:a {:href "https://twitter.com/calherries"} "Twitter"]]]]]])
+      [:li [:a {:href "https://twitter.com/calherries"} "Twitter"]]]]
+    [:div {:class "mb-5 mt-8 pt-4"}
+     [:b "Contact"]
+     [:p "calherries[at]gmail.com"]
+     [:p "Tallinn, Estonia"]]]])
+
 
 (prn "Updated index")
 (spit "index.html" (utils/convert-to index-page :html))
